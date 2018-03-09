@@ -1,4 +1,4 @@
-package ru.job4j;
+package main.java.job4j;
 
 public class Calculate{
 	public static void main(String[] args){
