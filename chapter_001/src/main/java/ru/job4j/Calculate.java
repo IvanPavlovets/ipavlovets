@@ -1,23 +1,27 @@
-package main.java.ru.job4j;
+package ru.job4j;
 
 /**
-* Calculate. Этот класс содержит только етод main
-* который вызывает статический метод println() для
-* вывода аргумента, в виде строки, на консоль
+* Calculate. 
 *
 * @author Ivan Pavlovets (ivan150287@gmail.com)
 * @version $Id$
 * @since 0.1
 */
 public class Calculate{
-
 	/**
-	* Main. Метод являеться точкой ыхода программы,
-	* в его теле вызываеться другие методы.
-	*
-	* @param args - args
+	* Main.
+	* @param args - args.
 	*/
 	public static void main(String[] args){
 		System.out.println("Hello world.");
+	}
+	
+	/**
+	* Method echo.
+	* @param name Your name.
+	* @return Echo plus your name.
+	*/
+	public String echo(String name) {
+		return "Echo, echo, echo : " + name;
 	}
 }
