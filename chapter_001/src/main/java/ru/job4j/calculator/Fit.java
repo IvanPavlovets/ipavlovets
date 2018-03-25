@@ -5,13 +5,17 @@ package ru.job4j.calculator;
  */
 public class Fit {
 
+    public static final int MAN_CORRECTOR = 100;
+    public static final int WOMAN_CORRECTOR = 110;
+    public static final double MULTIPLIER = 1.15;
+
     /**
      * Идеальный вес для мужчины.
      * @param height Рост.
      * @return идеальный вес.
      */
     public double manWeight(double height){
-        return (height - 100)*1.15;
+        return (height - MAN_CORRECTOR)* MULTIPLIER;
     }
 
     /**
@@ -20,7 +24,7 @@ public class Fit {
      * @return идеальный вес.
      */
     public double womanWeight(double height){
-        return (height - 110)*1.15;
+        return (height - WOMAN_CORRECTOR)*MULTIPLIER;
     }
 
 }
