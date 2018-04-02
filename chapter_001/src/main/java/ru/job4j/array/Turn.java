@@ -10,7 +10,7 @@ public class Turn {
      * @param array - массив который будет переворачиваться.
      * @return - перевернутый масив.
      */
-    public int[] back(int[] array) {
+    public int[] turn(int[] array) {
         // проходим половину массива так как перестановка элементов
         // идет оновременно как в начале так и в конце массива
         for (int i = 0; i < array.length / 2; i++) {
@@ -23,4 +23,5 @@ public class Turn {
         }
         return array;
     }
+
 }
