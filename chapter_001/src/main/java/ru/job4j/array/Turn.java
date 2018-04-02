@@ -13,15 +13,16 @@ public class Turn {
     public int[] turn(int[] array) {
         // проходим половину массива так как перестановка элементов
         // идет оновременно как в начале так и в конце массива
-        for (int i = 0; i < array.length / 2; i++) {
+        for (int i = 0; i < array.length / 2 ; i++) {
             // запоменаем во временной переменой значения массива поочередно с начала;
             int temp = array[i];
             // поочередно с начала, записываем в ячейку массива значения с конца массива;
-            array[i] = array[array.length - i - 1];
+            array[i] = array[array.length - 1 - i];
             // с конца записываем поочередно в ячеки массива значения временной переменной;
-            array[array.length - i - 1] = temp;
+            array[array.length - 1 - i] = temp;
         }
         return array;
     }
+
 
 }
