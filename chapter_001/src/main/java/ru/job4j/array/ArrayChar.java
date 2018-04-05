@@ -21,9 +21,9 @@ public class ArrayChar {
         boolean result = true;
         char[] value = prefix.toCharArray();
         // сравнивает символы в массивах (введеном и инициализируемом в констркуторе).
-        for (int i = 0; i < value.length ; i++) {
+        for (int i = 0; i < value.length; i++) {
             // если неравенство верно то флаг меняеться на false.
-            if (value[i] != data[i]){
+            if (value[i] != data[i]) {
                 return false;
             }
         }

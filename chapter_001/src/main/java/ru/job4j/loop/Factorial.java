@@ -10,7 +10,7 @@ public class Factorial {
      * @param n - аргумент, целое число.
      * @return факториал аргумента.
      */
-    public int calc(int n){
+    public int calc(int n) {
         int count = 1;
         for (int i = 1; i <= n; i++) {
             count *= i;

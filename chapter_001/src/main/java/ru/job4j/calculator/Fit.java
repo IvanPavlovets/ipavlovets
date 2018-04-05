@@ -14,8 +14,8 @@ public class Fit {
      * @param height Рост.
      * @return идеальный вес.
      */
-    public double manWeight(double height){
-        return (height - MAN_CORRECTOR)* MULTIPLIER;
+    public double manWeight(double height) {
+        return (height - MAN_CORRECTOR) * MULTIPLIER;
     }
 
     /**
@@ -23,8 +23,8 @@ public class Fit {
      * @param height Рост.
      * @return идеальный вес.
      */
-    public double womanWeight(double height){
-        return (height - WOMAN_CORRECTOR)*MULTIPLIER;
+    public double womanWeight(double height) {
+        return (height - WOMAN_CORRECTOR) * MULTIPLIER;
     }
 
 }

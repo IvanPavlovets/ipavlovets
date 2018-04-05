@@ -12,7 +12,7 @@ public class Max {
      * @param first, second - первый и второй аргументы.
      * @return большее значение.
      */
-    public int max(int first, int second){
+    public int max(int first, int second) {
         return first > second ? first : second;
     }
 
@@ -21,7 +21,7 @@ public class Max {
      * @param first, second, third - первый, второй и третий аргументы.
      * @return большее значение.
      */
-    public int max(int first, int second, int third){
+    public int max(int first, int second, int third) {
         return this.max(this.max(first, second), third);
     }
 

@@ -16,7 +16,7 @@ public class Board {
      * @param height - высота доски.
      * @return строку изображающую шахматную доску в псевдографике.
      */
-    public String paint(int width, int height){
+    public String paint(int width, int height) {
         StringBuilder screen = new StringBuilder();
         String ln = System.lineSeparator();
         for (int i = 0; i < height; i++) {
@@ -32,11 +32,6 @@ public class Board {
             screen.append(ln);
         }
         return screen.toString();
-    }
-
-    public static void main(String[] args) {
-        Board board = new Board();
-        System.out.println(board.paint(5,4));
     }
 
 }

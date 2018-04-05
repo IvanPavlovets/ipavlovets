@@ -10,18 +10,18 @@ public class BubbleSort {
      * @param array - переданный массив.
      * @return - отсортированный массив.
      */
-    public int[] sort(int[] array){
+    public int[] sort(int[] array) {
         boolean flag = true;
         // выполняем сортировку до тех пор пока элементы не отсортируються по возростанию.
-        while(flag){
+        while (flag) {
             flag = false;
-            for (int i = 0; i < array.length - 1 ;i++){
+            for (int i = 0; i < array.length - 1; i++) {
                 // если элемент с начала списа больше последующего то делаем перестановку элементов.
-                if(array[i] > array[i + 1]){
+                if (array[i] > array[i + 1]) {
                     // запоминаем этот больший элемент во временой переменной.
                     int temp = array[i];
                     // на место большего элемента ставим меньший.
-                    array[i] = array[i+1];
+                    array[i] = array[i + 1];
                     // на место меньшего элемента ставим больший, который запомнили в переменной temp.
                     array[i + 1] = temp;
                     flag = true;
