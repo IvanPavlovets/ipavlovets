@@ -30,4 +30,24 @@ public class ArrayCharTest {
         boolean result = word.startWith("Hi");
         assertThat(result, is(false));
     }
+
+    /**
+     * Метод возвращает true если слово содержит другое слово.
+     */
+    @Test
+    public void whenOriginWordContainsSubWordThenTrue() {
+        ArrayChar word = new ArrayChar();
+        boolean result = word.contains("игротека", "грот");
+        assertThat(result, is(true));
+    }
+
+    /**
+     * Метод возвращает false если слово не содержит другое слово.
+     */
+    @Test
+    public void whenOriginWordNotContainsSubWordThenFalse() {
+        ArrayChar word = new ArrayChar();
+        boolean result = word.contains("игротека", "гор");
+        assertThat(result, is(false));
+    }
 }
