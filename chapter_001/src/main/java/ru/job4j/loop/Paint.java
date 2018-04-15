@@ -37,6 +37,10 @@ public class Paint {
     /**
      * Уневирсальный метод пострения треуголников, в зависимости от
      * принимаемых параметров и условий проверки логических вырожений
+     * Обьект StringBuilder screen - буфер для результата.
+     * Внешний цикл двигается по строкам.
+     * Внутренний цикл определяет положение ячейки в строке.
+     * В условие определяеться простановка символа ^ или пробела.
      *
      * @param height - высота треугольника.
      * @param weight - шерина треугольника.
@@ -44,13 +48,9 @@ public class Paint {
      * @return - треугольник из символов ^ и пробелов.
      */
     private String loopBy(int height, int weight, BiPredicate<Integer, Integer> predict) {
-        // Буфер для результата.
         StringBuilder screen = new StringBuilder();
-        // внешний цикл двигается по строкам.
         for (int row = 0; row != height; row++) {
-            // внутренний цикл определяет положение ячейки в строке.
             for (int column = 0; column != weight; column++) {
-                // условие простановки символа ^ или пробела.
                 if (predict.test(row, column)) {
                     screen.append("^");
                 } else {
