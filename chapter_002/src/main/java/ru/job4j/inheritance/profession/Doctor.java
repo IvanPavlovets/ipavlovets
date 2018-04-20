@@ -13,13 +13,8 @@ public class Doctor {
      * @param patient
      * @return - диагноз пациента.
      */
-    public Diagnose treatPatient(Patient patient){
+    public Diagnose treatPatient(Patient patient) {
         return patient.diagnose;
     }
 
-    public static void main(String[] args) {
-        Doctor doctor = new Doctor();
-        Patient patient = new Patient("грип");
-        System.out.println(doctor.treatPatient(patient));
-    }
 }

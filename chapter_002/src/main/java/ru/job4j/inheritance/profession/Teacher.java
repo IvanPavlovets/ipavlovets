@@ -4,6 +4,6 @@ import ru.job4j.inheritance.obj.Student;
 
 public class Teacher {
 
-    public void teachStudent(Student student){
+    public void teachStudent(Student student) {
     }
 }
