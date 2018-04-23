@@ -11,9 +11,6 @@ public class ArrayChar {
         this.data = line.toCharArray();
     }
 
-    public ArrayChar() {
-    }
-
     /**
      * Проверяет. что слово начинается с префикса.
      * Сравнивает символы в value и data.

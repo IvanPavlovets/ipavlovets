@@ -36,7 +36,7 @@ public class ArrayCharTest {
      */
     @Test
     public void whenOriginWordContainsSubWordThenTrue() {
-        ArrayChar word = new ArrayChar();
+        ArrayChar word = new ArrayChar("игротека");
         boolean result = word.contains("игротека", "грот");
         assertThat(result, is(true));
     }
@@ -46,7 +46,7 @@ public class ArrayCharTest {
      */
     @Test
     public void whenOriginWordNotContainsSubWordThenFalse() {
-        ArrayChar word = new ArrayChar();
+        ArrayChar word = new ArrayChar("игротека");
         boolean result = word.contains("игротека", "гор");
         assertThat(result, is(false));
     }
