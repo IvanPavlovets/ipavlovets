@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Класс для работы с пользователем, реализует интерфейс Input.
  */
-public class ConsoleInput implements Input{
+public class ConsoleInput implements Input {
     /**
      * Класс Scanner принимает поток ввода (System.in) с консоли,
      * с помощью метода получения полной строки nextLine.
