@@ -1,4 +1,4 @@
-package ru.job4j.trackingsystem;
+package ru.job4j.trackingsystem.io;
 
 /**
  * Интерфейс системы ввода/вывода трекинговой системы,

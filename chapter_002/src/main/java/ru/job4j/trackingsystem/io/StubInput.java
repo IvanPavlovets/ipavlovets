@@ -1,4 +1,6 @@
-package ru.job4j.trackingsystem;
+package ru.job4j.trackingsystem.io;
+
+import ru.job4j.trackingsystem.io.Input;
 
 /**
  * Класс эмулирующий поведение пользователя, реализует интерфейс Input.

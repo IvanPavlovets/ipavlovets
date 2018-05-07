@@ -1,4 +1,4 @@
-package ru.job4j.trackingsystem;
+package ru.job4j.trackingsystem.model;
 
 import java.util.Random;
 

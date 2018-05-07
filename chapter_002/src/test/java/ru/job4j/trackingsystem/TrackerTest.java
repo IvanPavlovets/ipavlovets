@@ -1,6 +1,9 @@
 package ru.job4j.trackingsystem;
 
 import org.junit.Test;
+import ru.job4j.trackingsystem.model.Item;
+import ru.job4j.trackingsystem.model.Tracker;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
