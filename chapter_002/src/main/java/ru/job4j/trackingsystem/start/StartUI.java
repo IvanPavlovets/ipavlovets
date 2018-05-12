@@ -2,6 +2,7 @@ package ru.job4j.trackingsystem.start;
 
 import ru.job4j.trackingsystem.io.ConsoleInput;
 import ru.job4j.trackingsystem.io.Input;
+import ru.job4j.trackingsystem.io.ValidateInput;
 import ru.job4j.trackingsystem.menu.MenuTracker;
 import ru.job4j.trackingsystem.model.Item;
 import ru.job4j.trackingsystem.model.Tracker;
@@ -43,8 +44,7 @@ public class StartUI {
             // каждый раз показываем меню.
             menu.show();
             // спрашиваем пункт меню который хочет выбрать пользователь
-            int key = Integer.valueOf(input.ask("Выберете пункт меню"));
-            menu.select(key);
+            menu.select(input.ask("Выбирите ключ: ", menu.getActionsNumbers()));
         } while (!"y".equals(this.input.ask("Exit?(y):")));
     }
 
@@ -53,7 +53,7 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        Input console = new ConsoleInput();
+        Input console = new ValidateInput();
         Tracker tracker = new Tracker();
         StartUI startUI = new StartUI(console, tracker);
         startUI.init();

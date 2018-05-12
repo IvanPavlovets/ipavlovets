@@ -1,12 +1,9 @@
 package ru.job4j.trackingsystem.io;
 
-import ru.job4j.trackingsystem.io.Input;
-
 /**
  * Класс эмулирующий поведение пользователя, реализует интерфейс Input.
  */
 public class StubInput implements Input {
-
     /**
      * Это поле содержит последовательность ответов пользователя.
      * Например. Если пользователь
@@ -14,9 +11,9 @@ public class StubInput implements Input {
      * 0 - выбор пункта меня "добавить новую заявку".
      * name - имя заявки
      * desc - описание заявки
-     * y - выйти из трекера.
+     * 6 - выйти из трекера.
      */
-    private String[] answers;
+    private final String[] answers;
 
     /**
      * Поле считает количество вызовом метода ask.
@@ -38,7 +35,14 @@ public class StubInput implements Input {
      */
     @Override
     public String ask(String question) {
-        return answers[this.position++];
+        return this.answers[this.position++];
     }
+
+    @Override
+    public int ask(String question, int[] range) {
+        //throw new UnsupportedOperationException("Unsupported operation");
+        return -1;
+    }
+
 }
 

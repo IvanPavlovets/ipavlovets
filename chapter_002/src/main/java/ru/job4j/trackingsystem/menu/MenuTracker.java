@@ -77,6 +77,14 @@ public class MenuTracker {
      */
     private UserAction[] actions = new UserAction[6];
 
+    public final int[] getActionsNumbers() {
+        int[] ranges = new int[actions.length];
+        for (int i = 0; i < actions.length; i++) {
+            ranges[i] = i;
+        }
+        return ranges;
+    }
+
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
