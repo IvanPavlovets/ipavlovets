@@ -2,6 +2,8 @@ package ru.job4j.strategy;
 
 import org.junit.Test;
 
+import java.util.StringJoiner;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -15,13 +17,14 @@ public class TriangleTest {
      * Тест проверяет рисование треугольника классом Triangle.
      */
     @Test
-    public void whenDrawSquare() {
+    public void whenDrawTriangle() {
         Shape triangle = new Triangle();
-        assertThat(triangle.draw(), is(new StringBuilder()
-                        .append("   ^   \n")
-                        .append("  ^ ^  \n")
-                        .append(" ^   ^ \n")
-                        .append("^^^^^^^\n")
+        assertThat(triangle.draw(), is(new StringJoiner(
+                        System.lineSeparator(), "", System.lineSeparator())
+                        .add("   ^   ")
+                        .add("  ^ ^  ")
+                        .add(" ^   ^ ")
+                        .add("^^^^^^^")
                         .toString()
                 )
         );

@@ -12,6 +12,7 @@ import ru.job4j.trackingsystem.io.StubInput;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.StringJoiner;
 
 public class StartUITest {
     // поле содержит дефолтный вывод в консоль.
@@ -33,24 +34,20 @@ public class StartUITest {
         System.setOut(this.stdout);
     }
 
-    private Tracker initTest() {
-        return new Tracker();
-    }
-
     /**
      * Метод эмулирует вывод пунктов меню в консоль.
      * @return - строка пунктов меню.
      */
     public String menuPtrn() {
-        StringBuilder menu = new StringBuilder();
-        menu.append("\nМеню.\r\n");
-        menu.append("0 - Добавить новую заявку\r\n");
-        menu.append("1 - Показать все заявки\r\n");
-        menu.append("2 - Редактировать заявку\r\n");
-        menu.append("3 - Удалить заявку\r\n");
-        menu.append("4 - Найти заявку по id\r\n");
-        menu.append("5 - Найти заявки по имени\r\n");
-        menu.append("6 - Выйти из программы\r\n");
+        StringJoiner menu = new StringJoiner(System.lineSeparator(), "", System.lineSeparator());
+        menu.add("Меню.");
+        menu.add("0 - Добавить новую заявку");
+        menu.add("1 - Показать все заявки");
+        menu.add("2 - Редактировать заявку");
+        menu.add("3 - Удалить заявку");
+        menu.add("4 - Найти заявку по id");
+        menu.add("5 - Найти заявки по имени");
+        menu.add("6 - Выйти из программы");
         return String.valueOf(menu);
     }
 
@@ -60,7 +57,7 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
-        Tracker tracker = initTest();
+        Tracker tracker = new Tracker();
         //создаём StubInput с последовательностью действий
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
         // создаём StartUI и вызываем метод init()
@@ -78,7 +75,7 @@ public class StartUITest {
         //устанавливаем поток ввода в память
         this.loadOutput();
         // создаём Tracker
-        Tracker tracker = initTest();
+        Tracker tracker = new Tracker();
         //Напрямую добавляем заявки
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
@@ -88,14 +85,16 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(new String(out.toByteArray()),
+                // формирование строки в StringBuilder + вставки со StringJoiner что бы совпало точное количество разделителей - \r
                 is(new StringBuilder()
                         .append(menuPtrn())
-                        .append("------------ Все заявки системы --------------\r\n")
-                        .append("Имя: test name1 Описание: desc1\r\n")
-                        .append("Имя: test name2 Описание: desc2\r\n")
+                        .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+                                .add("------------ Все заявки системы --------------")
+                                .add("Имя: test name1 Описание: desc1")
+                                .add("Имя: test name2 Описание: desc2"))
                         .append(menuPtrn())
-                        .append("Выход из системы!")
-                        .append(System.lineSeparator())
+                        .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+                                .add("Выход из системы!"))
                         .toString()
                 )
         );
@@ -113,7 +112,7 @@ public class StartUITest {
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
         // создаём Tracker
-        Tracker tracker = initTest();
+        Tracker tracker = new Tracker();
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item());
         //создаём StubInput с последовательностью действий
@@ -131,7 +130,7 @@ public class StartUITest {
     @Test
     public void whenUserDeleteItemThenTrackerDoIt() {
         // создаём Tracker
-        Tracker tracker = initTest();
+        Tracker tracker = new Tracker();
         //Напрямую добавляем заявки
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
@@ -152,7 +151,7 @@ public class StartUITest {
         //устанавливаем поток ввода в память
         this.loadOutput();
         // создаём Tracker
-        Tracker tracker = initTest();
+        Tracker tracker = new Tracker();
         //Напрямую добавляем заявки
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
@@ -164,13 +163,15 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(new String(out.toByteArray()),
+                // формирование строки в StringBuilder + вставки со StringJoiner что бы совпало точное количество разделителей - \r
                 is(new StringBuilder()
                         .append(menuPtrn())
-                        .append("------------ Поиск заявки по id --------------\r\n")
-                        .append("Найденная заявка: test name1\r\n")
+                        .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+                                .add("------------ Поиск заявки по id --------------")
+                                .add("Найденная заявка: test name1"))
                         .append(menuPtrn())
-                        .append("Выход из системы!")
-                        .append(System.lineSeparator())
+                        .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+                                .add("Выход из системы!"))
                         .toString()
                 )
         );
@@ -187,7 +188,7 @@ public class StartUITest {
         //устанавливаем поток ввода в память
         this.loadOutput();
         // создаём Tracker
-        Tracker tracker = initTest();
+        Tracker tracker = new Tracker();
         //Напрямую добавляем заявки
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
@@ -197,13 +198,15 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(new String(out.toByteArray()),
+                // формирование строки в StringBuilder + вставки со StringJoiner что бы совпало точное количество разделителей - \r
                 is(new StringBuilder()
                         .append(menuPtrn())
-                        .append("------------ Поиск заявки по имени --------------\r\n")
-                        .append("Имя: test name2 Описание: desc2\r\n")
+                        .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+                                .add("------------ Поиск заявки по имени --------------")
+                                .add("Имя: test name2 Описание: desc2"))
                         .append(menuPtrn())
-                        .append("Выход из системы!")
-                        .append(System.lineSeparator())
+                        .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+                                .add("Выход из системы!"))
                         .toString()
                 )
         );
