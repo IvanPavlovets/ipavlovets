@@ -15,9 +15,15 @@ import java.io.PrintStream;
 import java.util.StringJoiner;
 
 public class StartUITest {
-    // поле содержит дефолтный вывод в консоль.
+
+    /**
+     * поле содержит дефолтный вывод в консоль.
+     */
     private final PrintStream stdout = System.out;
-    // буфер для результата.
+
+    /**
+     * буфер для результата.
+     */
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
     /**
@@ -58,11 +64,8 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        //создаём StubInput с последовательностью действий
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
-        // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
-        // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.findAll()[0].getName(), is("test name"));
     }
 
@@ -72,20 +75,13 @@ public class StartUITest {
      */
     @Test
     public void whenUserWantSeeAllItemsThenTrackerShowHimAllItems() {
-        //устанавливаем поток ввода в память
         this.loadOutput();
-        // создаём Tracker
         Tracker tracker = new Tracker();
-        //Напрямую добавляем заявки
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
-        //создаём StubInput с последовательностью действий
         Input input = new StubInput(new String[]{"1", "6"});
-        // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
-        // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(new String(out.toByteArray()),
-                // формирование строки в StringBuilder + вставки со StringJoiner что бы совпало точное количество разделителей - \r
                 is(new StringBuilder()
                         .append(menuPtrn())
                         .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
@@ -98,7 +94,6 @@ public class StartUITest {
                         .toString()
                 )
         );
-        // возвращаем обратно стандартный вывод в консоль.
         this.backOutput();
     }
 
@@ -111,15 +106,10 @@ public class StartUITest {
      */
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
-        // создаём Tracker
-        Tracker tracker = new Tracker();
-        //Напрямую добавляем заявку
+        Tracker tracker = new Tracker();  //Напрямую добавляем заявку
         Item item = tracker.add(new Item());
-        //создаём StubInput с последовательностью действий
         Input input = new StubInput(new String[]{"2", item.getId(), "test name", "desc", "6"});
-        // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
-        // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.findAll()[0].getName(), is("test name"));
     }
 
@@ -129,16 +119,11 @@ public class StartUITest {
      */
     @Test
     public void whenUserDeleteItemThenTrackerDoIt() {
-        // создаём Tracker
         Tracker tracker = new Tracker();
-        //Напрямую добавляем заявки
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
-        //создаём StubInput с последовательностью действий
         Input input = new StubInput(new String[]{"3", item1.getId(), "6"});
-        // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
-        // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.findAll()[0].getName(), is("test name2"));
     }
 
@@ -148,22 +133,15 @@ public class StartUITest {
      */
     @Test
     public void whenUserWantFindItemByIdThenTrackerShowHimThisItem() {
-        //устанавливаем поток ввода в память
         this.loadOutput();
-        // создаём Tracker
+
         Tracker tracker = new Tracker();
-        //Напрямую добавляем заявки
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
-        // id искомой заявки
         String id = item1.getId();
-        //создаём StubInput с последовательностью действий
         Input input = new StubInput(new String[]{"4", id, "6"});
-        // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
-        // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(new String(out.toByteArray()),
-                // формирование строки в StringBuilder + вставки со StringJoiner что бы совпало точное количество разделителей - \r
                 is(new StringBuilder()
                         .append(menuPtrn())
                         .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
@@ -175,7 +153,6 @@ public class StartUITest {
                         .toString()
                 )
         );
-        // возвращаем обратно стандартный вывод в консоль.
         this.backOutput();
     }
 
@@ -185,20 +162,13 @@ public class StartUITest {
      */
     @Test
     public void whenUserWantFindItemByNameThenTrackerShowHimThisItem() {
-        //устанавливаем поток ввода в память
         this.loadOutput();
-        // создаём Tracker
         Tracker tracker = new Tracker();
-        //Напрямую добавляем заявки
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
-        //создаём StubInput с последовательностью действий
         Input input = new StubInput(new String[]{"5", "test name2", "6"});
-        // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
-        // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(new String(out.toByteArray()),
-                // формирование строки в StringBuilder + вставки со StringJoiner что бы совпало точное количество разделителей - \r
                 is(new StringBuilder()
                         .append(menuPtrn())
                         .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
@@ -210,7 +180,6 @@ public class StartUITest {
                         .toString()
                 )
         );
-        // возвращаем обратно стандартный вывод в консоль.
         this.backOutput();
     }
 }

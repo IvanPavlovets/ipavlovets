@@ -33,7 +33,6 @@ public class ConsoleInput implements Input {
     @Override
     public int ask(String question, int[] range) {
         int key = Integer.valueOf(this.ask(question));
-        // проверяем что данный ключ содержиться в диапозоне
         boolean exist = false;
         for (int value : range) {
             if (value == key) {
@@ -41,8 +40,7 @@ public class ConsoleInput implements Input {
                 break;
             }
         }
-        // в условии следим что значения key входят в диапозон range
-        if (exist){
+        if (exist) {
             return key;
         } else {
             throw new MenuOutException("Вышли из диапозона меню");
