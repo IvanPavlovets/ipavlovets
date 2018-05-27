@@ -16,15 +16,13 @@ class EditItem implements UserAction {
     @Override
     public void execute(Input input, Tracker tracker) {
         String id = input.ask("Введите id заменяемой заявки");
-        if (tracker.findById(id) != null) {
-            String name = input.ask("Введите имя новой заявки :");
-            String desc = input.ask("Введите описание новой заявки :");
-            Item item = new Item(name, desc);
-            tracker.replace(id, item);
-        } else {
+        if (tracker.findById(id) == null) {
             System.out.println("Нет такой заявки!");
         }
-
+        String name = input.ask("Введите имя новой заявки :");
+        String desc = input.ask("Введите описание новой заявки :");
+        Item item = new Item(name, desc);
+        tracker.replace(id, item);
     }
 
     @Override
