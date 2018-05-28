@@ -7,10 +7,10 @@ import ru.job4j.trackingsystem.io.Input;
 /**
  * Класс содержит действие меню - редактировать заявку.
  */
-class EditItem implements UserAction {
-    @Override
-    public int key() {
-        return 2;
+class EditItem extends BaseAction {
+
+    protected EditItem(int key, String name) {
+        super(key, name);
     }
 
     @Override
@@ -24,20 +24,15 @@ class EditItem implements UserAction {
         Item item = new Item(name, desc);
         tracker.replace(id, item);
     }
-
-    @Override
-    public String info() {
-        return String.format("%s. %s", this.key(), "Редактировать заявку.");
-    }
 }
 
 /**
  * Класс содержит действие меню - найти заявку по имени.
  */
-class FindItemByName implements UserAction {
-    @Override
-    public int key() {
-        return 5;
+class FindItemByName extends BaseAction {
+
+    protected FindItemByName(int key, String name) {
+        super(key, name);
     }
 
     @Override
@@ -46,11 +41,6 @@ class FindItemByName implements UserAction {
         for (Item item : tracker.findByName(name)) {
             System.out.println("Имя: " + item.getName() + " Описание: " + item.getDescription());
         }
-    }
-
-    @Override
-    public String info() {
-        return String.format("%s. %s", this.key(), "Найти заявку по имени.");
     }
 }
 
@@ -69,6 +59,12 @@ public class MenuTracker {
      * и всех утилитных методов трекинговой системы.
      */
     private Tracker tracker;
+
+    /**
+     * Указатель позиции. Что бы добовлять события в систему.
+     */
+    private int position = 0;
+
 
     /**
      * массив содержит все действия системы.
@@ -95,12 +91,20 @@ public class MenuTracker {
     public void fillActions() {
         // создаем экземпляр внутренего класса
         // и инициализируем его передаными обьектами.
-        this.actions[0] = this.new AddItem();
-        this.actions[1] = new MenuTracker.ShowItems();
-        this.actions[2] = new EditItem();
-        this.actions[3] = this.new DeleteItem();
-        this.actions[4] = new MenuTracker.FindItemById();
-        this.actions[5] = new FindItemByName();
+        this.actions[position++] = this.new AddItem(0, "Добавить новую заявку");
+        this.actions[position++] = new MenuTracker.ShowItems(1, "Показать все заявки системы.");
+        this.actions[position++] = new EditItem(2, "Редактировать заявку.");
+        this.actions[position++] = this.new DeleteItem(3, "Удалить заявку.");
+        this.actions[position++] = new MenuTracker.FindItemById(4, "Найти заявку по id.");
+        this.actions[position++] = new FindItemByName(5, "Найти заявку по имени.");
+    }
+
+    /**
+     * Метод принимает событие и добовляет его в хранилище системы.
+     * @param action - добовляемое событие - действие в трекинговойсистеме.
+     */
+    public void addAction(UserAction action) {
+        this.actions[position++] = action;
     }
 
     /**
@@ -125,11 +129,10 @@ public class MenuTracker {
     /**
      * Внутрений класс определяет внтутренюю логику действия меню по добовлению заявки.
      */
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction {
 
-        @Override
-        public int key() {
-            return 0;
+        public AddItem(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -143,27 +146,15 @@ public class MenuTracker {
             String desc = input.ask("Введите описание новой заявки :");
             tracker.add(new Item(name, desc));
         }
-
-        /**
-         * сообщает пользователю о том что данный пункт меню делает.
-         * @return - строка формируеться по шаблону
-         * принимающиму в качестве значений передоваемые данные
-         * для сложения 2х строк
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Добавить новую заявку.");
-        }
     }
 
     /**
      * Внутрений класс содержит внтутренюю логику меню по удалению заявки.
      */
-    private class DeleteItem implements UserAction {
+    private class DeleteItem extends BaseAction {
 
-        @Override
-        public int key() {
-            return 3;
+        protected DeleteItem(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -177,27 +168,15 @@ public class MenuTracker {
             System.out.println("Заявка с именем: " + tracker.findById(id).getName() + " удалена!");
             tracker.delete(id);
         }
-
-        /**
-         * сообщает пользователю о том что данный пункт меню делает.
-         * @return - строка формируеться по шаблону
-         * принимающиму в качестве значений передоваемые данные
-         * для сложения 2х строк
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Удалить заявку.");
-        }
     }
 
     /**
      * Внутрений класс действия меню по показу всех заявок.
      */
-    private static class ShowItems implements UserAction {
+    private static class ShowItems extends BaseAction {
 
-        @Override
-        public int key() {
-            return 1;
+        protected ShowItems(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -211,21 +190,15 @@ public class MenuTracker {
                 System.out.println(String.format("%s. %s. %s", item.getName(), item.getDescription(), item.getId()));
             }
         }
-
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Показать все заявки системы.");
-        }
     }
 
     /**
      * Статический Внутрений класс реализует действия меню по поиску заявки по id.
      */
-    private static class FindItemById implements UserAction {
+    private static class FindItemById extends BaseAction {
 
-        @Override
-        public int key() {
-            return 4;
+        protected FindItemById(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -237,11 +210,6 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Введите id заявки");
             System.out.println("Найденная заявка: " + tracker.findById(id).getName());
-        }
-
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Найти заявку по id.");
         }
     }
 
