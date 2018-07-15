@@ -46,31 +46,29 @@ public class StartUITest {
      */
     public String menuPtrn() {
         StringJoiner menu = new StringJoiner(System.lineSeparator(), "", System.lineSeparator());
-        menu.add("Меню.");
-        menu.add("0 - Добавить новую заявку");
-        menu.add("1 - Показать все заявки");
-        menu.add("2 - Редактировать заявку");
-        menu.add("3 - Удалить заявку");
-        menu.add("4 - Найти заявку по id");
-        menu.add("5 - Найти заявки по имени");
-        menu.add("6 - Выйти из программы");
+        menu.add("0. Добавить новую заявку.");
+        menu.add("1. Показать все заявки системы.");
+        menu.add("2. Редактировать заявку.");
+        menu.add("3. Удалить заявку.");
+        menu.add("4. Найти заявку по id.");
+        menu.add("5. Найти заявку по имени.");
         return String.valueOf(menu);
     }
 
     /**
-     * В тест методе происходит проверка пункта меню по номеру 0 - "Добавить новую заявку" и проверяються
+     * В тест методе происходит проверка пункта меню по номеру 0 - "Добавить новую заявку." и проверяються
      * внутрений метод createItem().
      */
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("test name"));
     }
 
     /**
-     * В тест методе происходит проверка пункта меню по номеру 1 - "Показать все заявки" и проверяються
+     * В тест методе происходит проверка пункта меню по номеру 1 - "Показать все заявки." и проверяються
      * внутрений метод showItems().
      */
     @Test
@@ -79,18 +77,16 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
-        Input input = new StubInput(new String[]{"1", "6"});
+        String idItem1 = item1.getId();
+        String idItem2 = item2.getId();
+        Input input = new StubInput(new String[]{"1", "y"});
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
                 is(new StringBuilder()
                         .append(menuPtrn())
                         .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                                .add("------------ Все заявки системы --------------")
-                                .add("Имя: test name1 Описание: desc1")
-                                .add("Имя: test name2 Описание: desc2"))
-                        .append(menuPtrn())
-                        .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                                .add("Выход из системы!"))
+                                .add("test name1. desc1. " + idItem1)
+                                .add("test name2. desc2. " + idItem2))
                         .toString()
                 )
         );
@@ -108,7 +104,7 @@ public class StartUITest {
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Tracker tracker = new Tracker();  //Напрямую добавляем заявку
         Item item = tracker.add(new Item());
-        Input input = new StubInput(new String[]{"2", item.getId(), "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "test name", "desc", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("test name"));
     }
@@ -122,7 +118,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
-        Input input = new StubInput(new String[]{"3", item1.getId(), "6"});
+        Input input = new StubInput(new String[]{"3", item1.getId(), "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("test name2"));
     }
@@ -134,22 +130,17 @@ public class StartUITest {
     @Test
     public void whenUserWantFindItemByIdThenTrackerShowHimThisItem() {
         this.loadOutput();
-
         Tracker tracker = new Tracker();
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
         String id = item1.getId();
-        Input input = new StubInput(new String[]{"4", id, "6"});
+        Input input = new StubInput(new String[]{"4", id, "y"});
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
                 is(new StringBuilder()
                         .append(menuPtrn())
                         .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                                .add("------------ Поиск заявки по id --------------")
                                 .add("Найденная заявка: test name1"))
-                        .append(menuPtrn())
-                        .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                                .add("Выход из системы!"))
                         .toString()
                 )
         );
@@ -166,17 +157,13 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
-        Input input = new StubInput(new String[]{"5", "test name2", "6"});
+        Input input = new StubInput(new String[]{"5", "test name2", "y"});
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
                 is(new StringBuilder()
                         .append(menuPtrn())
                         .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                                .add("------------ Поиск заявки по имени --------------")
                                 .add("Имя: test name2 Описание: desc2"))
-                        .append(menuPtrn())
-                        .append(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                                .add("Выход из системы!"))
                         .toString()
                 )
         );

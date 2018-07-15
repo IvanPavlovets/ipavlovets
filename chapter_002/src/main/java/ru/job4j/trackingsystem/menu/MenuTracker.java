@@ -91,7 +91,7 @@ public class MenuTracker {
     public void fillActions() {
         // создаем экземпляр внутренего класса
         // и инициализируем его передаными обьектами.
-        this.actions[position++] = this.new AddItem(0, "Добавить новую заявку");
+        this.actions[position++] = this.new AddItem(0, "Добавить новую заявку.");
         this.actions[position++] = new MenuTracker.ShowItems(1, "Показать все заявки системы.");
         this.actions[position++] = new EditItem(2, "Редактировать заявку.");
         this.actions[position++] = this.new DeleteItem(3, "Удалить заявку.");
