@@ -5,7 +5,6 @@ import ru.job4j.gameofchess.ImposibleMoveException;
 
 public class Bishop extends Figure {
 
-
     /**
      * Конструктор по умолчанию который принимает позицию
      * @param position - кординаты фигуры на шахматной доске
@@ -41,7 +40,7 @@ public class Bishop extends Figure {
             } else {
                 deltaX = source.x - i;
             }
-            steps[i - 1] = new Cell(deltaX, deltaY);
+            steps[i - 1] = findCell(deltaX, deltaY);
         }
         return steps;
     }

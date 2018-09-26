@@ -64,7 +64,7 @@ public class Board {
         return result;
     }
 
-    private int findBy(Cell cell) {
+    public int findBy(Cell cell) {
         int rst = -1;
         for (int index = 0; index < this.figures.length; index++) {
             if (figures[index] != null && figures[index].position.x == cell.x && figures[index].position.y == cell.y) {
