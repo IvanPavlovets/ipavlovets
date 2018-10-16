@@ -24,22 +24,14 @@ public class Bishop extends Figure {
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImposibleMoveException {
         if (!isDiagonal(source, dest)) {
-            throw new ImposibleMoveException("Фигура не может так ходить.");
+            throw new ImposibleMoveException("Фигура не может так ходить!");
         }
         Cell[] steps = new Cell[Math.abs(dest.x - source.x)];
-        int deltaX;
-        int deltaY;
+        int deltaX = Integer.compare(dest.x, source.x);
+        int deltaY = Integer.compare(dest.y, source.y);
         for (int i = 1; i <= steps.length; i++) {
-            if (dest.y > source.y) {
                 deltaY = source.y + i;
-            } else {
-                deltaY = source.y - i;
-            }
-            if (dest.x > source.x) {
                 deltaX = source.x + i;
-            } else {
-                deltaX = source.x - i;
-            }
             steps[i - 1] = findCell(deltaX, deltaY);
         }
         return steps;

@@ -16,6 +16,7 @@ public class Board {
 
     /**
      * Добовляет фигуру на доску.
+     *
      * @param figure - добовляемая фигура.
      */
     void add(Figure figure) {
@@ -29,69 +30,67 @@ public class Board {
      * с начальной клетки до клетки, куда ходим.
      * В конечном итоге в ячейку записываеться новое положение фигуры (метод copy)
      * или пораждаеться одна из трех возможных исключительных ситаций.
-     *
+     * <p>
      * Метод проверяет что в заданой ячейки есть фигура,
      * в противном случае FigureNotFoundException.
-     *
+     * <p>
      * Если фигура есть то проверка на то может ли фигура так двигаться,
      * в противном случае ImposibleMoveException.
-     *
+     * <p>
      * Если возвращеный ход в виде клеток занят фигурами то OccupiedWayException.
      * Если клетки свободны то записать в ячейку новое положение фигуры, методом copy.
+     *
      * @param source
      * @param dest
      * @return
-     * @throws ImposibleMoveException - возникает в случае если возможный ход проходит через занятые ячейки другими ячейками
-     * @throws OccupiedWayException - возникает если фигура не может совершить данное движение
+     * @throws ImposibleMoveException  - возникает в случае если возможный ход проходит через занятые ячейки другими ячейками
+     * @throws OccupiedWayException    - возникает если фигура не может совершить данное движение
      * @throws FigureNotFoundException - возникает в случае если в заданой ячейки нет фигуры
      */
-    public boolean move(Cell source, Cell dest) {
+    public boolean move(Cell source, Cell dest)
+            throws ImposibleMoveException, OccupiedWayException, FigureNotFoundException {
         boolean result = true;
+        // 1 метод
         int index = this.findBy(source);
-        try {
-            //Figure figureToMove = figures[indexFigure];
-            Cell[] steps = figures[index].way(source, dest);
-            for (Cell cell : steps) {
-                if (figureInCell(cell)) {
-                    throw new OccupiedWayException("Клетка занята");
-                }
-            }
-            figures[index] = figures[index].copy(dest);
-        } catch (ImposibleMoveException e) {
-            System.out.println(e.getMessage());
+
+        if (index == -1) {
             result = false;
+            throw new FigureNotFoundException("В клетке отсутсвует фигура!");
         }
+        // конец 1 метода
+
+        Cell[] steps = figures[index].way(source, dest);
+        // 2 метод occupaidWay(way);  проверяет есть ли фигура на пути
+        for (Cell cell : steps) {
+            index = this.findBy(cell);
+            if (index != -1) {
+                result = false;
+                throw new OccupiedWayException("Ход невозможен. Клетка на пути занята!");
+            }
+        }
+        // конец 2 метода
+        figures[index] = figures[index].copy(dest);
+
         return result;
     }
 
+    /**
+     * Прроверяет наличие фигуры в клетке и если фигура массива figures присутсвует в клетке то
+     * возвращает индекс этой фигуры в массиве figures.
+     *
+     * @param cell проверяемая ячейка.
+     * @return -1 или соответствующей индекс figures.
+     */
     public int findBy(Cell cell) {
-        int rst = -1;
+        int rst = -1; // ничего не нашел.
         for (int index = 0; index < this.figures.length; index++) {
             if (figures[index] != null && figures[index].position.x == cell.x && figures[index].position.y == cell.y) {
                 rst = index;
                 break;
             }
         }
-        if (rst == -1) {
-            throw new FigureNotFoundException("В клетке отсутсвует фигура");
-        }
         return rst;
     }
 
-    /**
-     * Проверяет наличие ячейки в клетке.
-     * @param dest проверяемая ячейка.
-     * @return Результат проверки.
-     */
-    private boolean figureInCell(Cell dest) {
-        boolean result = false;
-        for (int i = 0; i < this.figures.length; i++) {
-            if (figures[i] != null && figures[i].position.x == dest.x && figures[i].position.y == dest.y) {
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
 }
 
