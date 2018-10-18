@@ -49,28 +49,22 @@ public class Board {
      */
     public boolean move(Cell source, Cell dest)
             throws ImposibleMoveException, OccupiedWayException, FigureNotFoundException {
-        boolean result = true;
-        // 1 метод
+        boolean result = false;
         int index = this.findBy(source);
-
         if (index == -1) {
-            result = false;
             throw new FigureNotFoundException("В клетке отсутсвует фигура!");
         }
-        // конец 1 метода
-
         Cell[] steps = figures[index].way(source, dest);
-        // 2 метод occupaidWay(way);  проверяет есть ли фигура на пути
         for (Cell cell : steps) {
             index = this.findBy(cell);
             if (index != -1) {
-                result = false;
                 throw new OccupiedWayException("Ход невозможен. Клетка на пути занята!");
             }
         }
-        // конец 2 метода
-        figures[index] = figures[index].copy(dest);
-
+        if (steps.length > 0) {
+            this.figures[index] = this.figures[index].copy(dest);
+            result = true;
+        }
         return result;
     }
 
@@ -82,7 +76,7 @@ public class Board {
      * @return -1 или соответствующей индекс figures.
      */
     public int findBy(Cell cell) {
-        int rst = -1; // ничего не нашел.
+        int rst = -1;
         for (int index = 0; index < this.figures.length; index++) {
             if (figures[index] != null && figures[index].position.x == cell.x && figures[index].position.y == cell.y) {
                 rst = index;

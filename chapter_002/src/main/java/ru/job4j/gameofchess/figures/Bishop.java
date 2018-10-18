@@ -29,10 +29,12 @@ public class Bishop extends Figure {
         Cell[] steps = new Cell[Math.abs(dest.x - source.x)];
         int deltaX = Integer.compare(dest.x, source.x);
         int deltaY = Integer.compare(dest.y, source.y);
+        int stepX = 0;
+        int stepY = 0;
         for (int i = 1; i <= steps.length; i++) {
-                deltaY = source.y + i;
-                deltaX = source.x + i;
-            steps[i - 1] = findCell(deltaX, deltaY);
+            stepX = source.x + (deltaX * i);
+            stepY = source.y + (deltaY * i);
+            steps[i - 1] = findCell(stepX, stepY);
         }
         return steps;
     }
