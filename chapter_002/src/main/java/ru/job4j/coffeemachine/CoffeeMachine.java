@@ -33,7 +33,7 @@ public class CoffeeMachine {
      */
     int[] changes(int value, int price) {
         if (value < price) {
-           throw  new NotEnoughMoneyException("Недостаточно денег на кофе!");
+           throw new NotEnoughMoneyException("Недостаточно денег на кофе!");
         }
         change = value - price;
         num10 = change / 10;

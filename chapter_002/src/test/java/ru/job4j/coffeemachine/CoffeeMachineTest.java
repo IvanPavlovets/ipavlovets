@@ -1,7 +1,6 @@
 package ru.job4j.coffeemachine;
 
 import org.junit.Test;
-import ru.job4j.gameofchess.Cell;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -30,6 +29,15 @@ public class CoffeeMachineTest {
         int[] actual = coffeeMachine.changes(50, 36);
         int[] expected = {10, 2, 2};
         assertThat(actual, is(expected));
+    }
+
+    /**
+     * В тесте проверяеться выбрасывания исключения NotEnoughMoneyException.
+     */
+    @Test(expected = NotEnoughMoneyException.class)
+    public void whenPriceLowerThenValueThenExeptionCall() {
+        CoffeeMachine coffeeMachine = new CoffeeMachine();
+        int[] actual = coffeeMachine.changes(50, 100);
     }
 
 }
