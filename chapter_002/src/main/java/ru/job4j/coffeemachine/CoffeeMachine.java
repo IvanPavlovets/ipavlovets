@@ -8,22 +8,13 @@ public class CoffeeMachine {
      * Сумма сдачи.
      */
     int change;
+
     /**
-     * Количество монет номиналом 10.
+     * Массив номиналов монет.
+     * Каждому индексу соответсвует свой номинал монет
+     * [0] - 10-ки, [1] - 5-ки, [2] - 2-ки, [3] - 1-цы.
      */
-    int num10;
-    /**
-     * Количество монет номиналом 5.
-     */
-    int num5;
-    /**
-     * Количество монет номиналом 2.
-     */
-    int num2;
-    /**
-     * Количество монет номиналом 1.
-     */
-    int num1;
+    int[] cartridge = new int[4];
 
     /**
      * Метод возврашает сдачу после покупки кофе.
@@ -36,22 +27,23 @@ public class CoffeeMachine {
            throw new NotEnoughMoneyException("Недостаточно денег на кофе!");
         }
         change = value - price;
-        num10 = change / 10;
-        num5 = (change - (num10 * 10)) / 5;
-        num2 = (change - ((num10 * 10) + (num5 * 5))) / 2;
-        num1 = (change - ((num10 * 10) + (num5 * 5) + (num2 * 2))) / 1;
-        coins = new int[num1 + num2 + num5 + num10];
-        for (int i = 0; i < num10; i++) {
+        cartridge[0] = change / 10;
+        cartridge[1] = (change - (cartridge[0] * 10)) / 5;
+        cartridge[2] = (change - ((cartridge[0] * 10) + (cartridge[1] * 5))) / 2;
+        cartridge[3] = (change - ((cartridge[0] * 10) + (cartridge[1] * 5) + (cartridge[2] * 2))) / 1;
+
+        coins = new int[cartridge[3] + cartridge[2] + cartridge[1] + cartridge[0]];
+        for (int i = 0; i < cartridge[0]; i++) {
             coins[i] = 10;
         }
-        for (int i = 0; i < num5; i++) {
-            coins[i + num10] = 5;
+        for (int i = 0; i < cartridge[1]; i++) {
+            coins[i + cartridge[0]] = 5;
         }
-        for (int i = 0; i < num2; i++) {
-            coins[i + num10 + num5] = 2;
+        for (int i = 0; i < cartridge[2]; i++) {
+            coins[i + cartridge[0] + cartridge[1]] = 2;
         }
-        for (int i = 0; i < num1; i++) {
-            coins[i + num10 + num5 + num2] = 1;
+        for (int i = 0; i < cartridge[3]; i++) {
+            coins[i + cartridge[0] + cartridge[1] + cartridge[2]] = 1;
         }
         return coins;
     }
