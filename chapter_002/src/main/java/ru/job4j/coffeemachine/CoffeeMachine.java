@@ -3,18 +3,17 @@ package ru.job4j.coffeemachine;
 import java.util.Arrays;
 
 public class CoffeeMachine {
-    int[] coins;
     /**
      * Сумма сдачи.
      */
-    int change;
+    private int change;
 
     /**
      * Массив номиналов монет.
      * Каждому индексу соответсвует свой номинал монет
      * [0] - 10-ки, [1] - 5-ки, [2] - 2-ки, [3] - 1-цы.
      */
-    int[] cartridge = new int[4];
+    private int[] cartridge = new int[4];
 
     /**
      * Метод возврашает сдачу после покупки кофе.
@@ -23,6 +22,7 @@ public class CoffeeMachine {
      * @return сдача наименьшим количеством монет номиналом 1, 2, 5, 10.
      */
     int[] changes(int value, int price) {
+        int[] coins;
         if (value < price) {
            throw new NotEnoughMoneyException("Недостаточно денег на кофе!");
         }
