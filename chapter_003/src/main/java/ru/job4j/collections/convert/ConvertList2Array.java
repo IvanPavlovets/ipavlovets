@@ -36,22 +36,4 @@ public class ConvertList2Array {
         return array;
     }
 
-
-    public static void main(String[] args) {
-        List<Integer> list1 = new ArrayList<Integer>();
-        list1.add(1);
-        list1.add(2);
-        list1.add(3);
-        list1.add(4);
-        list1.add(5);
-        list1.add(6);
-        list1.add(7);
-
-        ConvertList2Array convertList2Array = new ConvertList2Array();
-
-        System.out.println("toArray: ");
-        for (int[] arrInner : convertList2Array.toArray(list1, 3)) {
-            System.out.println(Arrays.toString(arrInner));
-        }
-    }
 }
