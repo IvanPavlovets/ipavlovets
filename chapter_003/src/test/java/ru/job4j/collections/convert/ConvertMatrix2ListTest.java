@@ -20,4 +20,19 @@ public class ConvertMatrix2ListTest {
         List<Integer> result = list.toList(input);
         assertThat(result, is(expect));
     }
+
+    /**
+     * Тест проверяет конвертацию списка массивов целых чисел в
+     * список целых чисел.
+     */
+    @Test
+    public void whenInputListOfIntArrayThenListOfInteger() {
+        ConvertMatrix2List list = new ConvertMatrix2List();
+        List<int[]> input = Arrays.asList(new int[]{1,2}, new int[]{3,4}, new int[]{5, 6, 7});
+
+        List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+
+        List<Integer> result = list.convert(input);
+        assertThat(result, is(expect));
+    }
 }

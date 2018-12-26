@@ -15,5 +15,15 @@ public class ConvertMatrix2List {
         }
         return list;
     }
+
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> result = new ArrayList<>();
+        for (int[] ints : list) {
+            for (Integer i : ints) {
+                result.add(i);
+            }
+        }
+        return result;
+    }
 }
 
