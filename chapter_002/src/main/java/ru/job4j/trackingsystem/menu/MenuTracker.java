@@ -5,6 +5,7 @@ import ru.job4j.trackingsystem.model.Tracker;
 import ru.job4j.trackingsystem.io.Input;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Класс содержит действие меню - редактировать заявку.
@@ -71,9 +72,9 @@ public class MenuTracker {
     /**
      * массив содержит все действия системы.
      */
-    private ArrayList<UserAction> actions = new ArrayList<>();
+    private List<UserAction> actions = new ArrayList<>();
 
-    public final ArrayList<Integer> getActionsNumbers() {
+    public final List<Integer> getActionsNumbers() {
         ArrayList<Integer> ranges = new ArrayList<>();
         for (int i = 0; i < actions.size(); i++) {
             ranges.add(i);
