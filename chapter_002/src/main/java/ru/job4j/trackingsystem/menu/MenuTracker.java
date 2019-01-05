@@ -4,6 +4,8 @@ import ru.job4j.trackingsystem.model.Item;
 import ru.job4j.trackingsystem.model.Tracker;
 import ru.job4j.trackingsystem.io.Input;
 
+import java.util.ArrayList;
+
 /**
  * Класс содержит действие меню - редактировать заявку.
  */
@@ -69,12 +71,12 @@ public class MenuTracker {
     /**
      * массив содержит все действия системы.
      */
-    private UserAction[] actions = new UserAction[6];
+    private ArrayList<UserAction> actions = new ArrayList<>();
 
-    public final int[] getActionsNumbers() {
-        int[] ranges = new int[actions.length];
-        for (int i = 0; i < actions.length; i++) {
-            ranges[i] = i;
+    public final ArrayList<Integer> getActionsNumbers() {
+        ArrayList<Integer> ranges = new ArrayList<>();
+        for (int i = 0; i < actions.size(); i++) {
+            ranges.add(i);
         }
         return ranges;
     }
@@ -91,12 +93,12 @@ public class MenuTracker {
     public void fillActions() {
         // создаем экземпляр внутренего класса
         // и инициализируем его передаными обьектами.
-        this.actions[position++] = this.new AddItem(0, "Добавить новую заявку.");
-        this.actions[position++] = new MenuTracker.ShowItems(1, "Показать все заявки системы.");
-        this.actions[position++] = new EditItem(2, "Редактировать заявку.");
-        this.actions[position++] = this.new DeleteItem(3, "Удалить заявку.");
-        this.actions[position++] = new MenuTracker.FindItemById(4, "Найти заявку по id.");
-        this.actions[position++] = new FindItemByName(5, "Найти заявку по имени.");
+        this.actions.add(position++, this.new AddItem(0, "Добавить новую заявку."));
+        this.actions.add(position++, new ShowItems(1, "Показать все заявки системы."));
+        this.actions.add(position++, new EditItem(2, "Редактировать заявку."));
+        this.actions.add(position++, this.new DeleteItem(3, "Удалить заявку."));
+        this.actions.add(position++, new FindItemById(4, "Найти заявку по id."));
+        this.actions.add(position++, new FindItemByName(5, "Найти заявку по имени."));
     }
 
     /**
@@ -104,7 +106,7 @@ public class MenuTracker {
      * @param action - добовляемое событие - действие в трекинговойсистеме.
      */
     public void addAction(UserAction action) {
-        this.actions[position++] = action;
+        this.actions.set(position++, action);
     }
 
     /**
@@ -112,7 +114,7 @@ public class MenuTracker {
      * Возвращает действие которое храниться в массиве.
      */
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     /**

@@ -1,5 +1,7 @@
 package ru.job4j.trackingsystem.io;
 
+import java.util.List;
+
 /**
  * Класс эмулирующий поведение пользователя, реализует интерфейс Input.
  */
@@ -13,7 +15,7 @@ public class StubInput implements Input {
      * desc - описание заявки
      * 6 - выйти из трекера.
      */
-    private final String[] answers;
+    private final List<String> answers;
 
     /**
      * Поле считает количество вызовом метода ask.
@@ -21,7 +23,7 @@ public class StubInput implements Input {
      */
     private int position = 0;
 
-    public StubInput(String[] answers) {
+    public StubInput(List<String> answers) {
         this.answers = answers;
     }
 
@@ -35,11 +37,11 @@ public class StubInput implements Input {
      */
     @Override
     public String ask(String question) {
-        return this.answers[this.position++];
+        return this.answers.get(this.position++);
     }
 
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, List<Integer> range) {
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
         for (int value : range) {

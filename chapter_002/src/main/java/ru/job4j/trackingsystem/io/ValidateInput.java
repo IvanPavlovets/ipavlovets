@@ -1,5 +1,8 @@
 package ru.job4j.trackingsystem.io;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Класс выполняет проверку ввода данных пользователем.
  */
@@ -20,7 +23,7 @@ public class ValidateInput implements Input {
     }
 
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, List<Integer> range) {
         boolean invalid = true;
         int value = -1;
         do {

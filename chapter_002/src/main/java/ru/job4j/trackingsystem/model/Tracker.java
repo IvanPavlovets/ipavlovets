@@ -1,5 +1,7 @@
 package ru.job4j.trackingsystem.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -10,7 +12,7 @@ public class Tracker {
     /**
      * хранилище заявок.
      */
-    private Item[] items = new Item[10];
+    private List<Item> items = new ArrayList<>();
 
     /**
      * указатель ячейки добавляемой заявки.
@@ -22,12 +24,13 @@ public class Tracker {
     /**
      * Метод добавления заявки в хранилище.
      * При добавлении генерируеться случайный id.
+     *
      * @param item - добовляемая заявка.
      * @return - обьект заявки добавляемый в хранилище.
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(this.position++, item);
         return item;
     }
 
@@ -36,16 +39,17 @@ public class Tracker {
      * Заменяет ячейку в массиве item
      * найденую по id.
      * Вновь вставленой заявке присваеваеться новый id если еще не создан.
-     * @param id - аргумент сравниваеться с id элементов массива items.
+     *
+     * @param id      - аргумент сравниваеться с id элементов массива items.
      * @param newItem - новый обьект массива items который замещает найденый id.
      */
     public void replace(String id, Item newItem) {
         for (int i = 0; i != this.position; i++) {
-            if (items[i] != null && items[i].getId().equals(id)) {
+            if (items.get(i) != null && items.get(i).getId().equals(id)) {
                 if (newItem.getId() == null) {
                     newItem.setId(this.generateId());
                 }
-                items[i] = newItem;
+                items.set(i, newItem);
             }
         }
     }
@@ -61,27 +65,11 @@ public class Tracker {
      * обратно в items за вычетом удаленной ячеки, остальные пустые
      * элементы items заполняються null.
      * указатель заявок position декрементируеться на еденицу.
+     *
      * @param id - аргумент сравниваеться с id элементов массива items.
      */
     public void delete(String id) {
-        if (this.position != 0) {
-            Item[] buffer = new Item[this.position - 1];
-            for (int i = 1; i != this.position; i++) {
-                buffer[i - 1] = this.items[i - 1];
-                if (this.items[i - 1].getId().equals(id)) {
-                    System.arraycopy(this.items, i, buffer, i - 1, this.position - i);
-                    break;
-                }
-            }
-            this.position--;
-            for (int i = 0; i < this.items.length; i++) {
-                if (i < this.position) {
-                    this.items[i] = buffer[i];
-                } else {
-                    this.items[i] = null;
-                }
-            }
-        }
+        this.items.remove(this.findById(id));
     }
 
     /**
@@ -90,12 +78,13 @@ public class Tracker {
      * текущему положению указателя добавленых элементов.
      * В цикле происходит копирование основного массива
      * в массив result.
+     *
      * @return - список всех заявок.
      */
-    public Item[] findAll() {
-        Item[] result = new Item[this.position];
-        for (int i = 0; i != this.position; i++) {
-            result[i] = this.items[i];
+    public List<Item> findAll() {
+        List<Item> result = new ArrayList<>();
+        for (Item item : this.items) {
+            result.add(item);
         }
         return result;
     }
@@ -110,21 +99,17 @@ public class Tracker {
      * Во втором цикле заполняеться массив result
      * длинна котрова равна кол-ву найденых совподений
      * в первом цикле.
+     *
      * @param key - аргумент сравниваеться с именами
-     * элементов массива items.
+     *            элементов массива items.
      * @return - массив совпавших элементов.
      */
-    public Item[] findByName(String key) {
-        Item[] temp = new Item[this.position];
-        int i = 0;
+    public ArrayList<Item> findByName(String key) {
+        ArrayList<Item> result = new ArrayList<>();
         for (Item item : this.items) {
             if (item != null && item.getName().equals(key)) {
-                temp[i++] = item;
+                result.add(item);
             }
-        }
-        Item[] result = new Item[i];
-        for (int j = 0; j < result.length; j++) {
-            result[j] = temp[j];
         }
         return result;
     }
@@ -133,6 +118,7 @@ public class Tracker {
      * Метод возвращает обьект заявки по id.
      * Проверяет в цикле все элементы массива items
      * сравнивая id элемента с аргументом String id.
+     *
      * @param id - аргумент сравниваеться с id элементов массива items.
      * @return - совпавший по id обьект item.
      */
@@ -152,6 +138,7 @@ public class Tracker {
      * Сумма из сгенерированного случайного числа
      * и текущего времени в милисекундах
      * переводиться в тип String.
+     *
      * @return - уникальный ключ.
      */
     private String generateId() {
