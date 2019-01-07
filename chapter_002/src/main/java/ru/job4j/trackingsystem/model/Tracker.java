@@ -56,10 +56,15 @@ public class Tracker {
 
     /**
      * Метод удаления заявки.
+     * Удаление происходит по индексу совпавшего элемента по id.
      * @param id - аргумент сравниваеться с id элементов коллекции items.
      */
     public void delete(String id) {
-        this.items.remove(this.findById(id));
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getId().equals(id)) {
+                this.items.remove(i);
+            }
+        }
     }
 
     /**
