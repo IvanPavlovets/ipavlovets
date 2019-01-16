@@ -65,10 +65,10 @@ public class PaintTest {
         assertThat(
                 new String(out.toByteArray()),
                 is(new StringBuilder()
-                        .append("   ^   \n")
-                        .append("  ^ ^  \n")
-                        .append(" ^   ^ \n")
-                        .append("^^^^^^^\n")
+                        .append("   ^   \r\n")
+                        .append("  ^ ^  \r\n")
+                        .append(" ^   ^ \r\n")
+                        .append("^^^^^^^\r\n")
                         .append(System.lineSeparator())
                         .toString()
                 )

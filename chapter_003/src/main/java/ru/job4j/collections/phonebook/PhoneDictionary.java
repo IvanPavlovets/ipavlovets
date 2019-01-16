@@ -10,7 +10,7 @@ public class PhoneDictionary {
      * Метод добавления обьектов person в коллекцию persons.
      * @param person - обьект добавления.
      */
-    public void add(Person person){
+    public void add(Person person) {
         this.persons.add(person);
     }
 
@@ -19,7 +19,7 @@ public class PhoneDictionary {
      * @param key - ключ поиска.
      * @return список подошедших пользователей.
      */
-    public List<Person> find(String key){
+    public List<Person> find(String key) {
         List<Person> result = new ArrayList<>();
         for (Person person : persons) {
             if (person.getName().toLowerCase().contains(key.toLowerCase())
