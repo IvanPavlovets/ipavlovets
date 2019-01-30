@@ -19,15 +19,13 @@ public class TriangleTest {
     @Test
     public void whenDrawTriangle() {
         Shape triangle = new Triangle();
-        assertThat(triangle.draw(), is(new StringJoiner(
-                        System.lineSeparator(), "", System.lineSeparator())
-                        .add("   ^   ")
-                        .add("  ^ ^  ")
-                        .add(" ^   ^ ")
-                        .add("^^^^^^^")
-                        .toString()
-                )
-        );
+        StringJoiner pic = (new StringJoiner(
+                System.lineSeparator(), "", System.lineSeparator()));
+        pic.add("   ^   ");
+        pic.add("  ^ ^  ");
+        pic.add(" ^   ^ ");
+        pic.add("^^^^^^^");
+        assertThat(triangle.draw(), is(pic.toString()));
     }
 
 }

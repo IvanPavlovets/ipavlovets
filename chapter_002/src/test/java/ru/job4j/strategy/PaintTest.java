@@ -3,8 +3,11 @@ package ru.job4j.strategy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.StringJoiner;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -60,18 +63,13 @@ public class PaintTest {
 
     @Test
     public void whenDrawTriangle() {
+        StringJoiner pic = new StringJoiner(System.lineSeparator(), "", System.lineSeparator());
+        pic.add("   ^   ");
+        pic.add("  ^ ^  ");
+        pic.add(" ^   ^ ");
+        pic.add("^^^^^^^");
         // выполняем действия пишушиее в консоль.
         new Paint().draw(new Triangle());
-        assertThat(
-                new String(out.toByteArray()),
-                is(new StringBuilder()
-                        .append("   ^   \r\n")
-                        .append("  ^ ^  \r\n")
-                        .append(" ^   ^ \r\n")
-                        .append("^^^^^^^\r\n")
-                        .append(System.lineSeparator())
-                        .toString()
-                )
-        );
+        assertThat(new String(out.toByteArray()), is(pic.toString()));
     }
 }
