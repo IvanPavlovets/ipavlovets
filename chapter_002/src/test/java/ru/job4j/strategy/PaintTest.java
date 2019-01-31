@@ -55,7 +55,6 @@ public class PaintTest {
                         .append("+     +\n")
                         .append("+     +\n")
                         .append(" +++++")
-                        .append(System.lineSeparator())
                         .toString()
                 )
         );
