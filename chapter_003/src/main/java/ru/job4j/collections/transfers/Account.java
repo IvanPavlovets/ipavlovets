@@ -10,6 +10,9 @@ public class Account implements Comparable<Account> {
     private double values;
     private String requisites;
 
+    public Account() {
+    }
+
     public Account(double values, String requisites) {
         this.values = values;
         this.requisites = requisites;
@@ -34,12 +37,12 @@ public class Account implements Comparable<Account> {
      * @param amount
      * @return
      */
-    boolean transfer(Account destination, double amount) {
+    boolean transfer(Account dstAccount, double amount) {
         boolean success = false;
-        if (amount > 0 && amount < this.values && destination != null) {
+        if (amount > 0 && this.values > 0 && amount < this.values && dstAccount != null) {
             success = true;
             this.values -= amount;
-            destination.values += amount;
+            dstAccount.setValues(dstAccount.getValues() + amount);
         }
         return success;
     }

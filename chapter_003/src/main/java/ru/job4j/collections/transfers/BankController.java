@@ -84,14 +84,7 @@ public class BankController {
                                  String dstPassport, String dstRequisites,
                                  double amount) {
         Account srcAccount = findAccount(srcPassport, srcRequisites);
-        Account dstAccount = findAccount(dstPassport, dstRequisites);
-        boolean success = false;
-        if (amount > 0 && amount < srcAccount.getValues() && dstAccount != null) {
-            success = true;
-            srcAccount.setValues(srcAccount.getValues() - amount);
-            dstAccount.setValues(dstAccount.getValues() + amount);
-        }
-        return success;
+        return srcAccount.transfer(findAccount(dstPassport, dstRequisites), amount);
     }
 
     /**
@@ -101,7 +94,7 @@ public class BankController {
      * @return
      */
     private Account findAccount(String passport, String requisites) {
-        Account actualAccount = null;
+        Account actualAccount = new Account();
         for (User user : this.usersCollection.keySet()) {
             if (user.getPassport().equals(passport)) {
                 for (Account account : this.usersCollection.get(user)) {
