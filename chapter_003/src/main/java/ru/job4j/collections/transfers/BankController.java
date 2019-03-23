@@ -7,10 +7,14 @@ public class BankController {
     /**
      * Коллекция хранилище пользовательских счетов.
      */
-    public static Map<User, List<Account>> usersCollection;
+    private Map<User, List<Account>> usersCollection;
 
     public BankController() {
         usersCollection = new TreeMap<>();
+    }
+
+    public Map<User, List<Account>> getUsersCollection() {
+        return usersCollection;
     }
 
     /**
@@ -119,7 +123,7 @@ public class BankController {
         bankController.addAccountToUser("22222222", new Account(120.00, "333"));
         bankController.addAccountToUser("42006286", new Account(200.00, "444"));
 
-        for (User user : usersCollection.keySet()) {
+        for (User user : bankController.getUsersCollection().keySet()) {
             System.out.println(String.format("%s : %s", user, bankController.getUserAccounts(user.getPassport())));
         }
 
@@ -128,7 +132,7 @@ public class BankController {
         bankController.transferMoney("22222222", "333", "42006286", "111", 40);
 
         System.out.println();
-        for (User user : usersCollection.keySet()) {
+        for (User user : bankController.getUsersCollection().keySet()) {
             System.out.println(String.format("%s : %s", user, bankController.getUserAccounts(user.getPassport())));
         }
     }

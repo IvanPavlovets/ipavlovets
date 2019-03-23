@@ -3,11 +3,12 @@ package ru.job4j.collections.transfers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static ru.job4j.collections.transfers.BankController.usersCollection;
 
 public class BankControllerTest {
 
@@ -19,7 +20,7 @@ public class BankControllerTest {
         Set<User> userSet = new TreeSet<>();
         userSet.add(new User("Ivan", "42006286"));
 
-        MatcherAssert.assertThat(usersCollection.keySet(), is(userSet));
+        MatcherAssert.assertThat(bankController.getUsersCollection().keySet(), is(userSet));
     }
 
     @Test
@@ -32,7 +33,7 @@ public class BankControllerTest {
         Account account = new Account(100.00, "111");
         accountList2.add(account);
 
-        MatcherAssert.assertThat(usersCollection.get(new User("Ivan", "42006286")), is(accountList2));
+        MatcherAssert.assertThat(bankController.getUsersCollection().get(new User("Ivan", "42006286")), is(accountList2));
     }
 
     @Test
@@ -49,7 +50,7 @@ public class BankControllerTest {
         Account account = new Account(100.00, "111");
         accountList2.add(account);
 
-        MatcherAssert.assertThat(usersCollection.get(new User("Ivan", "42006286")), is(accountList2));
+        MatcherAssert.assertThat(bankController.getUsersCollection().get(new User("Ivan", "42006286")), is(accountList2));
     }
 
     /**
@@ -66,8 +67,8 @@ public class BankControllerTest {
 
         bankController.transferMoney("22222222", "333", "42006286", "111", 50);
 
-        double valueIvan = usersCollection.get(new User("Ivan", "42006286")).get(0).getValues();
-        double valueSerg = usersCollection.get(new User("Serg", "22222222")).get(0).getValues();
+        double valueIvan = bankController.getUsersCollection().get(new User("Ivan", "42006286")).get(0).getValues();
+        double valueSerg = bankController.getUsersCollection().get(new User("Serg", "22222222")).get(0).getValues();
 
         MatcherAssert.assertThat(valueIvan, is(valueSerg));
     }
