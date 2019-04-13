@@ -1,5 +1,6 @@
 package ru.job4j.collections.convert;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ConvertList2Array {
@@ -28,5 +29,4 @@ public class ConvertList2Array {
         }
         return array;
     }
-
 }
