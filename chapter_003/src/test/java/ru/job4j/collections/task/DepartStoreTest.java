@@ -82,4 +82,32 @@ public class DepartStoreTest {
         List<DepartStore.Org> result = deps.sortDesc(deps.convert(input));
         assertThat(result, is(expect));
     }
+
+    @Test
+    public void whenFirstLessThenSecondThenNegativeInteger() {
+        DepartStore.Org dep1 = new DepartStore.Org(Arrays.asList("k1"));
+        DepartStore.Org dep2 = new DepartStore.Org(Arrays.asList("k2"));
+        int result = dep1.compareTo(dep2);
+        int expect = -1;
+        assertThat(result, is(expect));
+    }
+
+    @Test
+    public void whenFirstGreaterThenSecondThenPositiveInteger() {
+        DepartStore.Org dep1 = new DepartStore.Org(Arrays.asList("k2"));
+        DepartStore.Org dep2 = new DepartStore.Org(Arrays.asList("k1"));
+        int result = dep1.compareTo(dep2);
+        int expect = 1;
+        assertThat(result, is(expect));
+    }
+
+    @Test
+    public void whenFirstEqualSecondThenZeroInteger() {
+        DepartStore.Org dep1 = new DepartStore.Org(Arrays.asList("k2"));
+        DepartStore.Org dep2 = new DepartStore.Org(Arrays.asList("k2"));
+        int result = dep1.compareTo(dep2);
+        int expect = 0;
+        assertThat(result, is(expect));
+    }
+
 }
