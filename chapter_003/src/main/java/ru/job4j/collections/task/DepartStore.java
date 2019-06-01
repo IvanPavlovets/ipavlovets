@@ -78,7 +78,13 @@ public class DepartStore {
 
         @Override
         public int compareTo(Org o) {
-            return this.deps.toString().compareTo(o.deps.toString());
+            for (int i = 0; i < Math.min(this.deps.size(), o.deps.size()); i++) {
+                int c = this.deps.get(i).compareTo(o.deps.get(i));
+                if (c != 0) {
+                    return c;
+                }
+            }
+            return Integer.compare(this.deps.size(), o.deps.size());
         }
 
         @Override
@@ -154,18 +160,7 @@ public class DepartStore {
      */
     public List<Org> sortAsc(List<Org> orgs) {
         List<Org> result = orgs;
-        Collections.sort(result, new Comparator<Org>() {
-            @Override
-            public int compare(Org left, Org right) {
-                for (int i = 0; i < Math.min(left.deps.size(), right.deps.size()); i++) {
-                    int c = left.deps.get(i).compareTo(right.deps.get(i));
-                    if (c != 0) {
-                        return c;
-                    }
-                }
-                return Integer.compare(left.deps.size(), right.deps.size());
-            }
-        });
+        Collections.sort(result);
         return result;
     }
 
