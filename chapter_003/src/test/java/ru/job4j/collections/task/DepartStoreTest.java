@@ -11,10 +11,27 @@ import static org.junit.Assert.assertThat;
 
 public class DepartStoreTest {
 
+
+    /**
+     * В тесте проверяеться ситуация когда на входе пропустил K1 и K2\SK1.
+     */
+    @Test
+    public void whenMissedInArray() {
+        DepartStore deps = new DepartStore();
+        String[] input = new String[]{"K1/SK1", "K1/SK2", "K1/SK1/SSK1",
+                "K1/SK1/SSK2", "K2", "K2/SK1/SSK1", "K2/SK1/SSK2"};
+
+        String[] expect = {"K1", "K1/SK1", "K1/SK1/SSK1",
+                "K1/SK1/SSK2", "K1/SK2", "K2", "K2/SK1", "K2/SK1/SSK1", "K2/SK1/SSK2"};
+
+        String[] result = deps.departCheck(input);
+        assertThat(result, is(expect));
+    }
+
     @Test
     public void whenMissed() {
         DepartStore deps = new DepartStore();
-        List<String> input = Arrays.asList("k1/sk1"); // вход
+        List<String> input = Arrays.asList("k1/sk1");
 
         List<DepartStore.Org> expect = Arrays.asList(
                 new DepartStore.Org(Arrays.asList("k1")),
