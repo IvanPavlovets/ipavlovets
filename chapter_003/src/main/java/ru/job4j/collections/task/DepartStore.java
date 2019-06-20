@@ -24,49 +24,54 @@ public class DepartStore {
      * @return
      */
     public String[] departCheck(String[] arr) {
-        List<String[]> splitList = new ArrayList<>();
+        Set<String> departSet = new TreeSet<>();
         for (String str : arr) {
-            splitList.add(str.split("/"));
-        }
-        int max = splitList.get(0).length;
-        for (int i = 1; i < splitList.size(); i++) {
-            if (splitList.get(i).length > max) {
-                max = splitList.get(i).length;
+            String[] line = str.split("/");
+            departSet.add(line[0]);
+            for (int i = 1; i < line.length; i++) {
+                departSet.add(line[0] + "/" + line[1]);
             }
         }
-        List<String[]> maxList = new ArrayList<>();
-        for (String[] strArr : splitList) {
-            if (strArr.length == max) {
-                maxList.add(strArr);
-            }
+        for (String s : arr) {
+            departSet.add(s);
         }
-        Set<String> set = new HashSet<>();
-        for (int i = 1; i < max; i++) {
-            for (int j = 0; j < maxList.size(); j++) {
-                String[] rstArr = new String[i];
-                System.arraycopy(maxList.get(j), 0, rstArr, 0, i);
-                if (rstArr.length > 1) {
-                    for (int k = 1; k < rstArr.length; k++) {
-                        rstArr[k] = "/" + rstArr[k];
-                    }
-                }
-                String str = "";
-                for (int k = 0; k < rstArr.length; k++) {
-                    str = str + rstArr[k];
-                }
-                set.add(str);
-            }
-        }
-        for (String string : arr) {
-            set.add(string);
-        }
-        String[] result = new String[set.size()];
+        String[] result = new String[departSet.size()];
         int i = 0;
-        for (String s : set) {
+        for (String s : departSet) {
             result[i] = s;
             i++;
         }
         return result;
+    }
+
+    String[] sortByIncrease(String[] arr) {
+        String[] arr1 = departCheck(arr);
+        Arrays.sort(arr1, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        return arr1;
+    }
+
+    String[] sortByDecrease(String[] arr) {
+        String[] arr1 = departCheck(arr);
+        Arrays.sort(arr1, new Comparator<String>() {
+            @Override
+            public int compare(String left, String right) {
+                int i = 0;
+                while (i < Math.min(left.length(), right.length())) {
+                    int eq = Character.compare(left.charAt(i), right.charAt(i));
+                    if (eq != 0) {
+                        return right.charAt(i) - left.charAt(i);
+                    }
+                    i++;
+                }
+                return left.length() - right.length();
+            }
+        });
+        return arr1;
     }
 
     public static final class Org implements Comparable<Org> {
@@ -185,9 +190,16 @@ public class DepartStore {
         List<String> input = Arrays.asList("K1/SK1", "K1/SK2", "K1/SK1/SSK1",
                 "K1/SK1/SSK2", "K2", "K2/SK1/SSK1", "K2/SK1/SSK2");
 
-        System.out.println("сорт " + departStore.convert(input));
-        System.out.println("возр " + departStore.sortAsc(departStore.convert(input)));
-        System.out.println("убыв " + departStore.sortDesc(departStore.convert(input)));
+//        System.out.println("сорт " + departStore.convert(input));
+//        System.out.println("возр " + departStore.sortAsc(departStore.convert(input)));
+//        System.out.println("убыв " + departStore.sortDesc(departStore.convert(input)));
 
+        String[] codeDepartArr = new String[]{"K1/SK1", "K1/SK2", "K1/SK1/SSK1",
+                "K1/SK1/SSK2", "K2", "K2/SK1/SSK1", "K2/SK1/SSK2"};
+
+        System.out.println(" было: " + Arrays.toString(codeDepartArr));
+        System.out.println("стало: " +  Arrays.toString(departStore.departCheck(codeDepartArr)));
+        System.out.println(" возр: " + Arrays.toString(departStore.sortByIncrease(codeDepartArr)));
+        System.out.println(" убыв: " + Arrays.toString(departStore.sortByDecrease(codeDepartArr)));
     }
 }
