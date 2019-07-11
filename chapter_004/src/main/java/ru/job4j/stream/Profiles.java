@@ -18,7 +18,7 @@ public class Profiles {
     public List<Profile.Address> coolect(List<Profile> profiles) {
         List<Profile.Address> addresses = profiles.stream().map(
                 profile -> profile.getAddress()
-        ).distinct().sorted((o1, o2) -> o1.getCity().compareTo(o2.getCity())).collect(Collectors.toList());
+        ).sorted((o1, o2) -> o1.getCity().compareTo(o2.getCity())).distinct().collect(Collectors.toList());
         return addresses;
     }
 
