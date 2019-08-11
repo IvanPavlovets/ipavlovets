@@ -1,6 +1,7 @@
 package ru.job4j.collections.transfers;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class BankController {
 
@@ -19,6 +20,7 @@ public class BankController {
 
     /**
      * Метод добавления пользователя.
+     *
      * @param user
      */
     public void addUser(User user) {
@@ -27,6 +29,7 @@ public class BankController {
 
     /**
      * Метод удаления пользователя.
+     *
      * @param user
      */
     public void deleteUser(User user) {
@@ -35,47 +38,43 @@ public class BankController {
 
     /**
      * Метод добавления 1 счета пользователю.
+     *
      * @param passport
      * @param account
      */
     public void addAccountToUser(String passport, Account account) {
-        for (User user : this.usersCollection.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                this.usersCollection.get(user).add(account);
-            }
-        }
+        this.usersCollection.get((this.usersCollection.keySet().stream().filter(
+                user -> user.getPassport().contains(passport)
+        ).collect(Collectors.toList())).get(0)).add(account);
     }
 
     /**
      * Метод удаляет 1 счет пользователя.
+     *
      * @param passport
      * @param account
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        for (User user : this.usersCollection.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                this.usersCollection.get(user).remove(account);
-            }
-        }
+        this.usersCollection.get(this.usersCollection.keySet().stream().filter(
+                user -> user.getPassport().contains(passport)
+        ).collect(Collectors.toList()).get(0)).remove(account);
     }
 
     /**
      * Метод возвращает сиспок счетов для конкретного пользователя.
+     *
      * @param passport
      * @return - список счетов пользователя.
      */
     public List<Account> getUserAccounts(String passport) {
-        List<Account> accountList = new ArrayList<>();
-        for (User user : usersCollection.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                accountList.addAll(this.usersCollection.get(user));
-            }
-        }
-        return accountList;
+        return this.usersCollection.get(this.usersCollection.keySet().stream().filter(
+                user -> user.getPassport().contains(passport)
+        ).collect(Collectors.toList()).get(0));
     }
 
     /**
      * Метод перечесления денег с одного счета на другой счет.
+     *
      * @param srcPassport
      * @param srcRequisites
      * @param dstPassport
@@ -93,22 +92,17 @@ public class BankController {
 
     /**
      * Находит искомый счет пользователя.
+     *
      * @param passport
      * @param requisites
      * @return
      */
     private Account findAccount(String passport, String requisites) {
-        Account actualAccount = new Account();
-        for (User user : this.usersCollection.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                for (Account account : this.usersCollection.get(user)) {
-                    if (account.getRequisites().equals(requisites)) {
-                        actualAccount = account;
-                    }
-                }
-            }
-        }
-        return actualAccount;
+        return this.usersCollection.get(this.usersCollection.keySet().stream().filter(
+                user -> user.getPassport().contains(passport)
+        ).collect(Collectors.toList()).get(0)).stream().filter(
+                account -> account.getRequisites().contains(requisites)
+        ).collect(Collectors.toList()).get(0);
     }
 
     public static void main(String[] args) {
