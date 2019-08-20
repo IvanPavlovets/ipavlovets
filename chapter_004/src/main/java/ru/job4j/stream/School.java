@@ -8,14 +8,14 @@ import java.util.stream.Collectors;
 
 
 public class School {
-    List<Student> collect(List<Student> students, Predicate<Student> redicate){
+    List<Student> collect(List<Student> students, Predicate<Student> redicate) {
         List<Student> studs = students.stream().filter(
                 redicate
         ).collect(Collectors.toList());
         return studs;
     }
 
-    Map<String, Student> toMap(List<Student> students){
+    Map<String, Student> toMap(List<Student> students) {
         Map<String, Student> studs = students.stream(
         ).collect(Collectors.toMap(
                 e -> e.getSurname(),

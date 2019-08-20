@@ -16,8 +16,12 @@ public class Profile {
 
     @Override
     public String toString() {
-        return "Profile{" +
-                "address=" + address +
+        return "Profile{"
+                +
+                "address="
+                +
+                address
+                +
                 '}';
     }
 
@@ -44,24 +48,50 @@ public class Profile {
 
         @Override
         public String toString() {
-            return "Address{" +
-                    "city='" + city + '\'' +
-                    ", street='" + street + '\'' +
-                    ", home=" + home +
-                    ", apartment=" + apartment +
+            return "Address{"
+                    +
+                    "city='"
+                    + city
+                    +
+                    '\''
+                    +
+                    ", street='"
+                    +
+                    street
+                    +
+                    '\''
+                    +
+                    ", home="
+                    +
+                    home
+                    +
+                    ", apartment="
+                    +
+                    apartment
+                    +
                     '}';
         }
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof Address)) return false;
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof Address)) {
+                return false;
+            }
 
             Address address = (Address) o;
 
-            if (home != address.home) return false;
-            if (apartment != address.apartment) return false;
-            if (!city.equals(address.city)) return false;
+            if (home != address.home) {
+                return false;
+            }
+            if (apartment != address.apartment) {
+                return false;
+            }
+            if (!city.equals(address.city)) {
+                return false;
+            }
             return street.equals(address.street);
         }
 
