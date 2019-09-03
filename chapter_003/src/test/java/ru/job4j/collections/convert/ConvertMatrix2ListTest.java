@@ -14,7 +14,7 @@ public class ConvertMatrix2ListTest {
                 {1, 2},
                 {3, 4}
         };
-        List<Integer> expect = Arrays.asList(
+        List<Integer> expect = List.of(
                 1, 2, 3, 4
         );
         List<Integer> result = list.toList(input);
@@ -28,9 +28,9 @@ public class ConvertMatrix2ListTest {
     @Test
     public void whenInputListOfIntArrayThenListOfInteger() {
         ConvertMatrix2List list = new ConvertMatrix2List();
-        List<int[]> input = Arrays.asList(new int[]{1, 2}, new int[]{3, 4}, new int[]{5, 6, 7});
+        List<int[]> input = List.of(new int[]{1, 2}, new int[]{3, 4}, new int[]{5, 6, 7});
 
-        List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        List<Integer> expect = List.of(1, 2, 3, 4, 5, 6, 7);
 
         List<Integer> result = list.convert(input);
         assertThat(result, is(expect));
