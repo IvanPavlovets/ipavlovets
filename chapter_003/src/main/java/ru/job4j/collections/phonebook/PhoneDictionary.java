@@ -21,7 +21,7 @@ public class PhoneDictionary {
      */
     public List<Person> find(String key) {
         List<Person> result = new ArrayList<>();
-        for (Person person : persons) {
+        for (var person : persons) {
             if (person.getName().toLowerCase().contains(key.toLowerCase())
                     || person.getSurname().toLowerCase().contains(key.toLowerCase())
                     || person.getPhone().toLowerCase().contains(key.toLowerCase())
@@ -33,7 +33,7 @@ public class PhoneDictionary {
     }
 
     public static void main(String[] args) {
-        PhoneDictionary phoneDictionary = new PhoneDictionary();
+        var phoneDictionary = new PhoneDictionary();
         phoneDictionary.add(new Person("Petr", "Arsentev", "534872", "Bryansk"));
         phoneDictionary.add(new Person("Ivan", "Pavlovets", "111", "Bryansk"));
         phoneDictionary.add(new Person("Dmitriy", "Pavlovets", "111", "Krasnoyark"));

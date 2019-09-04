@@ -22,7 +22,7 @@ public class PriorityQueue {
      * @param task задача
      */
     public void put(Task task) {
-        int i = 0;
+        var i = 0;
         while (!tasks.isEmpty() && tasks.get(i) != tasks.getLast() && tasks.get(i).getPriority() < task.getPriority()) {
             i++;
         }
