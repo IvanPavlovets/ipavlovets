@@ -11,7 +11,7 @@ public class SimpleArrayTest {
         SimpleArray arr1 = new SimpleArray(2);
         arr1.add(1);
         int expected = 1;
-        int result = (Integer) arr1.arrayData[0];
+        int result = (Integer) arr1.getArrayData()[0];
         assertThat(result, is(expected));
     }
 
@@ -22,7 +22,7 @@ public class SimpleArrayTest {
         arr1.add(1);
         arr1.set(1, "test");
         String expected = "test";
-        String result = (String) arr1.arrayData[1];
+        String result = (String) arr1.getArrayData()[1];
         assertThat(result, is(expected));
     }
 
@@ -33,7 +33,7 @@ public class SimpleArrayTest {
         arr1.add(2);
         arr1.remove(1);
         int[] expected = {1};
-        assertThat(arr1.arrayData, is(expected));
+        assertThat(arr1.getArrayData(), is(expected));
     }
 
     @Test

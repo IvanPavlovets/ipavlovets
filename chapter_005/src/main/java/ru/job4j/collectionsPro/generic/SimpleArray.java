@@ -4,11 +4,19 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 public class SimpleArray<T> implements Iterable<T> {
-    Object[] arrayData;
-    int position = 0;
+    private Object[] arrayData;
+    private int position = 0;
 
     public SimpleArray(int lenght) {
         this.arrayData = new Object[lenght];
+    }
+
+    public Object[] getArrayData() {
+        return arrayData;
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     /**
@@ -41,6 +49,7 @@ public class SimpleArray<T> implements Iterable<T> {
         System.arraycopy(arrayData, 0, arrayData1, 0, index);
         System.arraycopy(arrayData, index + 1, arrayData1, index, arrayData.length - index - 1);
         arrayData = arrayData1;
+        position--;
     }
 
     /**
