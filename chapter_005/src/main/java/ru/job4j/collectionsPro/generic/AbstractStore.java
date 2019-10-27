@@ -1,6 +1,6 @@
 package ru.job4j.collectionsPro.generic;
 
-public abstract class AbstractStore<T> implements Store {
+public abstract class AbstractStore<T extends Base> implements Store<T> {
 
     protected SimpleArray<? super T> storeData;
 
@@ -13,8 +13,8 @@ public abstract class AbstractStore<T> implements Store {
     }
 
     @Override
-    public void add(Base model) {
-        storeData.add((T) model);
+    public void add(T model) {
+        storeData.add(model);
     }
 
     /**
@@ -28,12 +28,12 @@ public abstract class AbstractStore<T> implements Store {
      * @return result - результат удаления.
      */
     @Override
-    public boolean replace(String id, Base model) {
+    public boolean replace(String id, T model) {
         boolean result = false;
         for (int i = 0; i != this.storeData.getPosition(); i++) {
-            Base obj = (Base) storeData.get(i);
+            T obj = (T) storeData.get(i);
             if (obj.getId().equals(id)) {
-                storeData.set(i, (T) model);
+                storeData.set(i, model);
                 result = true;
             }
         }
@@ -51,7 +51,7 @@ public abstract class AbstractStore<T> implements Store {
     public boolean delete(String id) {
         boolean result = false;
         for (int i = 0; i < storeData.getArrayData().length; i++) {
-            Base obj = (Base) storeData.get(i);
+            T obj = (T) storeData.get(i);
             if (obj.getId().equals(id)) {
                 this.storeData.remove(i);
                 result = true;
@@ -69,12 +69,12 @@ public abstract class AbstractStore<T> implements Store {
      * @return - совпавший по id обьект T.
      */
     @Override
-    public Base findById(String id) {
-        Base result = null;
+    public T findById(String id) {
+        T result = null;
         for (int i = 0; i < storeData.getArrayData().length; i++) {
-            Base obj = (Base) storeData.get(i);
+            T obj = (T) storeData.get(i);
             if (obj != null && obj.getId().equals(id)) {
-                result = (Base) obj;
+                result = obj;
                 break;
             }
         }
