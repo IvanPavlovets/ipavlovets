@@ -1,6 +1,6 @@
 package ru.job4j.collectionsPro.generic;
 
-public class UserStore<User> extends AbstractStore {
+public class UserStore extends AbstractStore<User> {
 
     protected UserStore(int size) {
         super(size);
