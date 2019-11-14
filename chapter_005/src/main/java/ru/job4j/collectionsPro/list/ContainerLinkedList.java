@@ -2,6 +2,7 @@ package ru.job4j.collectionsPro.list;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ContainerLinkedList<E> implements Iterable<E>{
 
@@ -23,6 +24,7 @@ public class ContainerLinkedList<E> implements Iterable<E>{
 
     /**
      * Метод получения элемента по индексу.
+     * В цикле передаеться ссылка на слеющий элемент.
      * @param index
      * @return
      */
@@ -37,20 +39,34 @@ public class ContainerLinkedList<E> implements Iterable<E>{
     @Override
     public Iterator iterator() {
         return new Iterator() {
-            int i = 0;
+            Node<E> current = first;
             int expectedModCount = modCount;
 
+            /**
+             * существует ли следующая ячейка.
+             * @return
+             */
             @Override
             public boolean hasNext() {
-                return size > i;
+                return current != null;
             }
 
+            /**
+             * Возвращает значение текущей ячейки и переводит
+             * корректку текущей позиции вперед.
+             * @return - значение текущей ячейки.
+             */
             @Override
             public E next() {
                 if (modCount != expectedModCount) {
                     throw new ConcurrentModificationException();
                 }
-                return get(i++);
+                if (!this.hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                E element = current.data;
+                current = current.next;
+                return element;
             }
         };
     }
