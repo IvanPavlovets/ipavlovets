@@ -36,6 +36,40 @@ public class ContainerLinkedList<E> implements Iterable<E>{
         return result.data;
     }
 
+    /**
+     * Алгоритм Флойда по отысканию петли или алгорим зайца и черепахи.
+     * Имеем 2 ссылки на список и перемещать их с разной скоростью.
+     * Переместить черепаху на 1 узел, зайца на 2 узла.
+     * Если в сязном списке есть цикл то черепаха с зайцем обязательно встретяться.
+     * В противном случае две ссылки ссылки стануть нулевыми.
+     * Есля заяц первым "добежит" до null то значит нет замыканий.
+     * @param first
+     * @return
+     */
+    public boolean hasCycle(Node first) {
+        if (first == null) {
+            return false;
+        }
+        Node turtle = first;
+        Node hare = first;
+
+        while (true) {
+            turtle = turtle.next;
+
+            if (hare.next != null) {
+                hare = hare.next.next;
+            } else {
+                return false;
+            }
+            if (turtle == null || hare == null) {
+                return false;
+            }
+            if (turtle == hare) {
+                return true;
+            }
+        }
+    }
+
     @Override
     public Iterator iterator() {
         return new Iterator() {
@@ -74,7 +108,7 @@ public class ContainerLinkedList<E> implements Iterable<E>{
     /**
      * Класс предназначен для хранения данных.
      */
-    private static class Node<E> {
+    static class Node<E> {
         E data;
         Node<E> next;
 
