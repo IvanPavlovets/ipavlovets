@@ -23,6 +23,10 @@ public class SimpleStack<T> {
         store.add(value);
     }
 
+    public int getSize() {
+        return this.store.getSize();
+    }
+
     @Override
     public String toString() {
         return "SimpleStack{" +

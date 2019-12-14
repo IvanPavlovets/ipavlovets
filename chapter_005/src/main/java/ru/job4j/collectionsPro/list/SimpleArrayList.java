@@ -50,6 +50,14 @@ public class SimpleArrayList<E> {
         return this.size;
     }
 
+    @Override
+    public String toString() {
+        return "SimpleArrayList{" +
+                "size=" + size +
+                ", first=" + first +
+                '}';
+    }
+
     /**
      * Класс предназначен для хранения данных.
      */
@@ -60,6 +68,14 @@ public class SimpleArrayList<E> {
 
         Node(E data) {
             this.data = data;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "data=" + data +
+                    ", next=" + next +
+                    '}';
         }
     }
 }

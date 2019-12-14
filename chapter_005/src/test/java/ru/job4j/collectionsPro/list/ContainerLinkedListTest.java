@@ -34,4 +34,30 @@ public class ContainerLinkedListTest {
         list.add(4);
         it.next();
     }
+
+    @Test
+    public void whenHasCycleThenGetTrue() {
+        ContainerLinkedList.Node first = new ContainerLinkedList.Node(1);
+        ContainerLinkedList.Node two = new ContainerLinkedList.Node(2);
+        ContainerLinkedList.Node third = new ContainerLinkedList.Node(3);
+        ContainerLinkedList.Node four = new ContainerLinkedList.Node(4);
+        first.next = two;
+        two.next = third;
+        third.next = four;
+        four.next = first;
+        assertThat(list.hasCycle(first), is(true));
+        assertThat(list.hasCycle(two), is(true));
+        assertThat(list.hasCycle(third), is(true));
+        assertThat(list.hasCycle(four), is(true));
+    }
+
+    @Test
+    public void whenNoCycleThenGetFalse() {
+        ContainerLinkedList.Node five = new ContainerLinkedList.Node(5);
+        ContainerLinkedList.Node six = new ContainerLinkedList.Node(6);
+        assertThat(list.hasCycle(five), is(false));
+        assertThat(list.hasCycle(six), is(false));
+    }
+
+
 }
