@@ -1,6 +1,7 @@
 package ru.job4j.collectionsPro.map;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class User {
     private String name;
@@ -12,5 +13,10 @@ public class User {
         this.children = children;
         this.birthday = Calendar.getInstance();
         this.birthday.set(yyyy, MM, dd);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, children);
     }
 }
