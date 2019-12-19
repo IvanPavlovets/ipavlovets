@@ -15,6 +15,19 @@ public class User {
         this.birthday.set(yyyy, MM, dd);
     }
 
+    /**
+     * Как происходит проверка в методе equals -
+     * if (this == o) return true; - проверяеться условие равенство обьектов по ссылке
+     * если ссылаються на одну и ту же ячейку памяти это одни и теже обьекты.
+     * if (!(o instanceof User)) return false; - если клас который породил обьекты не одинаков
+     * то это разные обьекты
+     * User user = (User) o; потом идет привидение типов полученого обьекта и сравнение поочередно полей обьекта
+     * return children == user.children &&
+     * name.equals(user.name);
+     *
+     * @param o - входящий параметр сравниваемый обьект.
+     * @return - булево значение идентичности обьектов.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -22,5 +35,10 @@ public class User {
         User user = (User) o;
         return children == user.children &&
                 Objects.equals(name, user.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, children);
     }
 }
