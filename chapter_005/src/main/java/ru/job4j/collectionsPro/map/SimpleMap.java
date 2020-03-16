@@ -11,6 +11,7 @@ import java.util.Objects;
  * table - массив хеш-таблица.
  * size - количество элементов в коллекции.
  * limit - степень загружености table - при случае загрузки умнажаем на 2 и заново перераспределяем элементы.
+ *
  * @param <K>
  * @param <V>
  */
@@ -32,6 +33,7 @@ public class SimpleMap<K, V> implements Iterable<V> {
      * Метод добавления элементов - центральное место работы всей Хеш таблицы.
      * Когда количество эл. + 1 больше или равно 3/4 кол-ва ячеек в массиве, то
      * перераспределяем ячейки с умножением на 2 длинны table/
+     *
      * @param key
      * @param value
      * @return
@@ -89,8 +91,8 @@ public class SimpleMap<K, V> implements Iterable<V> {
      * @return
      */
     private boolean keyExistValueRewrite(final Node<K, V> nodeFromList, final Node<K, V> newNode) {
-        if (newNode.getKey().equals(nodeFromList.getKey()) &&
-                !newNode.getValue().equals(nodeFromList.getValue())
+        if (newNode.getKey().equals(nodeFromList.getKey())
+                && !newNode.getValue().equals(nodeFromList.getValue())
         ) {
             nodeFromList.setValue(newNode.getValue());
             return true;
@@ -103,7 +105,8 @@ public class SimpleMap<K, V> implements Iterable<V> {
         if (table[index] == null) {
             return false;
         }
-        if (table[index].getNodelist().size() == 1) {
+        if (table[index].getNodelist().size() == 1
+                && key.equals(table[index].getNodelist().get(0).getKey())) {
             table[index] = null;
             return true;
         }
@@ -121,7 +124,8 @@ public class SimpleMap<K, V> implements Iterable<V> {
         int index = hash(key);
         if (index < table.length) {
             if (table[index] != null) {
-                if (table[index].getNodelist().size() == 1){
+                if (table[index].getNodelist().size() == 1
+                        && key.equals(table[index].getNodelist().get(0).getKey())) {
                     return table[index].getNodelist().get(0).getValue();
                 }
 
@@ -140,6 +144,7 @@ public class SimpleMap<K, V> implements Iterable<V> {
     /**
      * Хеш функция - алгоритм получения номера для ячейки(Node) в table.
      * Вся математика сдесь - алгоритм распределения случайного числав в перделах table.
+     *
      * @param key
      * @return
      */
@@ -154,6 +159,7 @@ public class SimpleMap<K, V> implements Iterable<V> {
      * counterTable - Счетчик идет по ячейкам table.
      * valuesCounter - счетчик идет по количеству значений, сравнивается с size.
      * subIterator - указатель на итератор nodelist (внутрений list содержит все ключи, значения).
+     *
      * @return
      */
     @Override
@@ -176,6 +182,7 @@ public class SimpleMap<K, V> implements Iterable<V> {
                 }
                 return subIterator.hasNext();
             }
+
             private boolean moveToNextCell() {
                 counterTable++;
                 while (counterTable < table.length && table[counterTable] == null) {
@@ -183,6 +190,7 @@ public class SimpleMap<K, V> implements Iterable<V> {
                 }
                 return counterTable < table.length && table[counterTable] != null;
             }
+
             @Override
             public V next() {
                 valuesCounter++;
@@ -194,6 +202,7 @@ public class SimpleMap<K, V> implements Iterable<V> {
     /**
      * Внутрений класс структура - хранит внешние - ключ и значение (заглушки)
      * а также содержит внутрений nodelist в котором содержаться истиные ключи и значения
+     *
      * @param <K>
      * @param <V>
      */
