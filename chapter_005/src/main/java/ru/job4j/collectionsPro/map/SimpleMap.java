@@ -29,6 +29,10 @@ public class SimpleMap<K, V> implements Iterable<V> {
         return table.length;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     /**
      * Метод добавления элементов - центральное место работы всей Хеш таблицы.
      * Когда количество эл. + 1 больше или равно 3/4 кол-ва ячеек в массиве, то
@@ -108,12 +112,14 @@ public class SimpleMap<K, V> implements Iterable<V> {
         if (table[index].getNodelist().size() == 1
                 && key.equals(table[index].getNodelist().get(0).getKey())) {
             table[index] = null;
+            size--;
             return true;
         }
         List<Node<K, V>> nodeList = table[index].getNodelist();
         for (Node<K, V> node : nodeList) {
             if (key.equals(node.getKey())) {
                 nodeList.remove(node);
+                size--;
                 return true;
             }
         }
