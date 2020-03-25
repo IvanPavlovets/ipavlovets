@@ -29,12 +29,13 @@ public class Tree<E> implements SimpleTree<E> {
     @Override
     public boolean add(E parent, E child) {
         boolean rsl = false;
-        Node<E> childNode = new Node<>(child);
-        if (!(findBy(parent).get().value.equals(parent) &&
-                        findBy(parent).get().children.contains(childNode)
+        Node<E> adddNode = new Node<>(child);
+        Optional<Node<E>> parentNode = findBy(parent);
+        Optional<Node<E>> childNode = findBy(child);
+        if (!(parentNode.get().value.equals(parent) &&
+                parentNode.get().children.contains(adddNode)
         )) {
-            Optional<Node<E>> parentNode = findBy(parent);
-            parentNode.get().children.add(childNode);
+            parentNode.get().children.add(adddNode);
             rsl = true;
         }
         return rsl;
@@ -59,23 +60,5 @@ public class Tree<E> implements SimpleTree<E> {
             data.addAll(el.children);
         }
         return rsl;
-    }
-
-    public static void main(String[] args) {
-        Tree<Integer> tree = new Tree<>(1);
-        tree.add(1,2);
-        tree.add(1,3);
-        tree.add(1,4);
-        System.out.println(tree.add(4,5));
-        System.out.println(tree.root);
-        System.out.println(tree.add(5,6));
-        System.out.println(tree.add(5,6));
-        System.out.println(tree.add(5,6));
-        System.out.println(tree.findBy(6).get());
-        System.out.println(tree.findBy(5).get().children);
-        System.out.println(tree.findBy(5));
-//        System.out.println(tree.root.value);
-//        System.out.println(tree.root.children);
-        //System.out.println(tree.findBy(7).get());
     }
 }
