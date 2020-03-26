@@ -1,6 +1,7 @@
 package ru.job4j.collectionsPro.tree;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Queue;
 
@@ -37,6 +38,31 @@ public class Tree<E> implements SimpleTree<E> {
         )) {
             parentNode.get().children.add(adddNode);
             rsl = true;
+        }
+        return rsl;
+    }
+
+    /**
+     * Метод проверки дерева на бинарность, не путать с бинарным деревом поиска!
+     * @return
+     */
+    @Override
+    public boolean isBinary() {
+        boolean rsl = false;
+        List<Node<E>> childrenList = root.children;
+        return loop(childrenList, rsl);
+    }
+
+    private boolean loop(List<Node<E>> childrenList, boolean rsl) {
+        if (childrenList.size() <= 2) {
+            for (Node<E> node : childrenList) {
+                if (!(node.children.size() <= 2)) {
+                    rsl = false;
+                    break;
+                }
+                rsl = true;
+                rsl = loop(node.children, rsl);
+            }
         }
         return rsl;
     }
