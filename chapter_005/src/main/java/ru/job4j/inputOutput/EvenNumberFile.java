@@ -1,7 +1,6 @@
 package ru.job4j.inputOutput;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class EvenNumberFile {
     public static void main(String[] args) {
