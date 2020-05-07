@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class Config {
     private final String path;
-    public final Map<String, String> values = new HashMap<String, String>();
+    private final Map<String, String> values = new HashMap<String, String>();
 
     public Config(final String path) {
         this.path = path;
@@ -20,7 +20,10 @@ public class Config {
         StringJoiner out = new StringJoiner(System.lineSeparator());
         try {
             BufferedReader read = new BufferedReader(new FileReader(this.path));
-            List<String> lines = read.lines().filter(task -> task.contains("=")).collect(Collectors.toList());
+            List<String> lines = read.lines()
+                    .filter(line -> !" ".equals(line))
+                    .filter(line -> !line.contains("#"))
+                    .filter(task -> task.contains("=")).collect(Collectors.toList());
             for (String line : lines) {
                 addValue(line);
             }
