@@ -1,7 +1,6 @@
 package ru.job4j.inputOutput;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class EvenNumberFile {
     public static void main(String[] args) {
@@ -18,7 +17,7 @@ public class EvenNumberFile {
             for (String line : lines) {
                 number = Integer.parseInt(line);
                 rsl = number % 2 == 0;
-                System.out.printf("%d - %b\n", number, rsl);
+                System.out.printf("%d - %b%n", number, rsl);
             }
         } catch (Exception e) {
             e.printStackTrace();
