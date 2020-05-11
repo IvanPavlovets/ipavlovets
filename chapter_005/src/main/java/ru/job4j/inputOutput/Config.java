@@ -17,16 +17,14 @@ public class Config {
     }
 
     public void load() {
-        StringJoiner out = new StringJoiner(System.lineSeparator());
         try {
             BufferedReader read = new BufferedReader(new FileReader(this.path));
-            List<String> lines = read.lines()
-                    .filter(line -> !" ".equals(line))
-                    .filter(line -> !line.contains("#"))
-                    .filter(task -> task.contains("=")).collect(Collectors.toList());
-            for (String line : lines) {
-                addValue(line);
-            }
+            read.lines()
+                    .filter(line -> line.startsWith("#") && line.isBlank())
+                    .forEach(line -> {
+                        String[] tokens = string.split("=");
+                        values.put(tokens[0], tokens[1]);
+                    });
         } catch (Exception e) {
             e.printStackTrace();
         }
