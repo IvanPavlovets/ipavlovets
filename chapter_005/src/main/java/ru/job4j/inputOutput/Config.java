@@ -3,10 +3,8 @@ package ru.job4j.inputOutput;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
 
 public class Config {
     private final String path;
@@ -17,22 +15,18 @@ public class Config {
     }
 
     public void load() {
+        values.clear();
         try {
             BufferedReader read = new BufferedReader(new FileReader(this.path));
             read.lines()
-                    .filter(line -> line.startsWith("#") && line.isBlank())
+                    .filter(l -> !l.startsWith("#") && !l.isBlank())
                     .forEach(line -> {
-                        String[] tokens = string.split("=");
+                        String[] tokens = line.split("=");
                         values.put(tokens[0], tokens[1]);
                     });
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void addValue(String string) {
-        String[] tokens = string.split("=");
-        values.put(tokens[0], tokens[1]);
     }
 
     public String value(String key) {
@@ -54,6 +48,5 @@ public class Config {
     public static void main(String[] args) {
         Config config = new Config("app.properties");
         config.load();
-        System.out.println(config.value("hibernate.connection.password"));
     }
 }
