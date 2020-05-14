@@ -19,8 +19,7 @@ public class Analizy {
     public void unavailable(String source, String target) {
         try (BufferedReader read = new BufferedReader(new FileReader(source));
              PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-            List<String> lines = read.lines().filter(task -> task.contains(" ")).collect(Collectors.toList());
-            Iterator it = lines.iterator();
+            Iterator it = read.lines().iterator();
             String line1;
             String line2;
             String[] buffer = new String[2];
