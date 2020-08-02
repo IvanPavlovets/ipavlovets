@@ -11,18 +11,25 @@ public class ArgZip {
     }
 
     public boolean valid() {
-        return false;
+        boolean result = false;
+        if (args.length == 3) {
+            result = true;
+        }
+        return result;
     }
 
     public String directory() {
-        return null;
+        String[] tokens = args[0].split("=");
+        return tokens[1];
     }
 
     public String exclude() {
-        return null;
+        String[] tokens = args[1].split("=");
+        return tokens[1];
     }
 
     public String output() {
-        return null;
+        String[] tokens = args[2].split("=");
+        return tokens[1];
     }
 }

@@ -31,7 +31,7 @@ public class SearchFiles implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        if (predicate.test(file)) {
+        if (!predicate.test(file)) {
             archiv.add(file.toAbsolutePath());
         }
         return CONTINUE;

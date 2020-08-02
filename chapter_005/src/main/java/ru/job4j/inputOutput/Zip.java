@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import static ru.job4j.inputOutput.Search.search;
+//import static ru.job4j.inputOutput.Search.search;
 
 public class Zip {
 
@@ -41,11 +41,20 @@ public class Zip {
 //                new File("./chapter_005/pom.xml"),
 //                new File("./chapter_005/pom.zip"));
 
-        Path start = Paths.get(".");
+        ArgZip argZip = new ArgZip(args);
 
-        List<File> src = search(start, "java").stream().map(Path::toFile).collect(Collectors.toList());
+        try {
 
-        new Zip().packFiles(src,
-                new File("./chapter_005/java.zip"));
+        if (argZip.valid()) {
+            Path start = Paths.get(argZip.directory());
+            List<File> src = new Search().search(start, argZip.exclude()).stream().map(Path::toFile).collect(Collectors.toList());
+            new Zip().packFiles(src,
+                    new File(argZip.output()));
+        }
+
+        } catch (IllegalArgumentException e) {
+            System.err.println("There must be three arguments, like this -d=c:\\project\\job4j\\ -e=class -o=project.zip");
+            System.exit(1);
+        }
     }
 }
