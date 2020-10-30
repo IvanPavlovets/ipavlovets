@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 
 public class EchoServer {
     public static void main(String[] args) throws IOException {
@@ -18,11 +17,11 @@ public class EchoServer {
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     String str;
-                    String msg = "HTTP/1.1 200 OKK\r\n\\";
+                    String msg = "HTTP/1.1 200 OK\r\n\\";
                     while (!(str = in.readLine()).isEmpty()) {
                         System.out.println(str);
                         if (str.contains("Bye")) {
-                            msg = "HTTP/1.1 200 Shutdown!\r\n\\";
+                            msg = "HTTP/1.1 200\r\n\\" + "Shutdown!";
                             isActive = false;
                             server.close();
                         }
