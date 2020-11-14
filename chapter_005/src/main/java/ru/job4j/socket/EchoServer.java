@@ -8,7 +8,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class EchoServer {
-
     public static void main(String[] args) throws IOException {
         try (ServerSocket server = new ServerSocket(9000)) {
             boolean isActive = true;
@@ -23,12 +22,11 @@ public class EchoServer {
                     System.out.println(str);
                     String[] part1 = str.split("HTTP/");
                     String[] part2 = part1[0].split("msg=");
-                    System.out.println(part2.length);
                     if (part2.length == 2) {
-                        answer = part2[1];
+                        answer = part2[1].replace("%20", " ");
                     }
-                    if (str.contains("Bye")) {
-                        answer = "Shutdown!";
+                    if (str.contains("Exit")) {
+                        answer = "Shutdown server!";
                         isActive = false;
                         server.close();
                     }
