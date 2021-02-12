@@ -1,0 +1,12 @@
+create database coffeshop_db;
+
+create table coffe_info(id serial primary key, name varchar(255), size int, price dec(10,2));
+
+insert  into coffe_info(name, size, price)
+values ('Paulig Presidentti Ruby', 250, 349.99);
+
+update coffe_info set name = 'Jardin';
+
+delete from coffe_info;
+
+select * from coffe_info;
