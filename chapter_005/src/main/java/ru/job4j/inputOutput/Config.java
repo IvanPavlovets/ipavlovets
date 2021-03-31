@@ -14,6 +14,9 @@ public class Config {
         this.path = path;
     }
 
+    /**
+     * метод фильтрует "загружаемый" поток и искомые пары(ключ/значение) складывает hashmap.
+     */
     public void load() {
         values.clear();
         try {
@@ -46,7 +49,13 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        Config config = new Config("app.properties");
+        Config config = new Config("app1.properties");
         config.load();
+        System.out.println(config.values.size());
+        System.out.println(config.value("hibernate.dialect"));
+        System.out.println(config.value("hibernate.connection.url"));
+        System.out.println(config.value("hibernate.connection.driver_class"));
+        System.out.println(config.value("hibernate.connection.username"));
+        System.out.println(config.value("hibernate.connection.password"));
     }
 }

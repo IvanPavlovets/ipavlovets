@@ -1,7 +1,8 @@
 package ru.job4j.trackingsystem.menu;
 
-import ru.job4j.trackingsystem.model.Tracker;
+import ru.job4j.trackingsystem.model.MemTracker;
 import ru.job4j.trackingsystem.io.Input;
+import ru.job4j.trackingsystem.model.Store;
 
 /**
  * Интерфейс всех действий меню трекера.
@@ -19,7 +20,7 @@ public interface UserAction {
      * @param input - обьект интерфейса ввода.
      * @param tracker - базовый класс хранилища и всех утилитных методов трекинговой системы.
      */
-    void execute(Input input, Tracker tracker);
+    void execute(Input input, Store tracker);
 
     /**
      * Сообщает пользователю что выбраное действие делает.

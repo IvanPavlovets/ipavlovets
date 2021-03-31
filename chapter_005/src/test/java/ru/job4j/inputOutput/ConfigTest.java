@@ -9,7 +9,7 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithoutComment() {
-        String path = "./app.properties";
+        String path = "C:\\projects\\ipavlovets\\app1.properties";
         Config config = new Config(path);
         config.load();
         assertThat(

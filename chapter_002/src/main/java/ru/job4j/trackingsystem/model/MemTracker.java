@@ -1,5 +1,6 @@
 package ru.job4j.trackingsystem.model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,7 +9,7 @@ import java.util.Random;
  * Класс - являеться хранилищем заявок
  * и осуществляет основные операции взоимодеяствия с заявками Item.
  */
-public class Tracker {
+public class MemTracker implements Store{
     /**
      * хранилище заявок.
      */
@@ -20,6 +21,11 @@ public class Tracker {
     private int position = 0;
 
     private static final Random RN = new Random();
+
+    @Override
+    public boolean init() throws ClassNotFoundException, SQLException {
+        return false;
+    }
 
     /**
      * Метод добавления заявки в хранилище.
@@ -39,11 +45,10 @@ public class Tracker {
      * Заменяет ячейку в коллекции item
      * найденую по id.
      * Вновь вставленой заявке присваеваеться новый id если еще не создан.
-     *
-     * @param id      - аргумент сравниваеться с id элементов массива items.
+     *  @param id      - аргумент сравниваеться с id элементов массива items.
      * @param newItem - новый обьект массива items который замещает найденый id.
      */
-    public void replace(String id, Item newItem) {
+    public boolean replace(String id, Item newItem) {
         for (int i = 0; i != this.position; i++) {
             if (items.get(i) != null && items.get(i).getId().equals(id)) {
                 if (newItem.getId() == null) {
@@ -52,6 +57,7 @@ public class Tracker {
                 items.set(i, newItem);
             }
         }
+        return false;
     }
 
     /**
@@ -59,12 +65,13 @@ public class Tracker {
      * Удаление происходит по индексу совпавшего элемента по id.
      * @param id - аргумент сравниваеться с id элементов коллекции items.
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getId().equals(id)) {
                 this.items.remove(i);
             }
         }
+        return false;
     }
 
     /**
@@ -134,5 +141,9 @@ public class Tracker {
         return String.valueOf(System.currentTimeMillis() + RN.nextInt());
     }
 
+    @Override
+    public void close() throws Exception {
+
+    }
 }
 

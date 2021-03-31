@@ -1,16 +1,18 @@
 package ru.job4j.trackingsystem.model;
 
+import java.util.Objects;
+
 /**
  * Класс заявки.
  */
 public class Item {
     private String id;
 
-    public String name;
+    private String name;
 
-    public String description;
+    private String description;
 
-    public long create;
+    private long create;
 
     public Item() {
     }
@@ -18,6 +20,12 @@ public class Item {
     public Item(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Item(String id, String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
     }
 
     public Item(String name, String description, long create) {
@@ -46,8 +54,31 @@ public class Item {
         this.id = id;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Objects.equals(id, item.id) &&
+                Objects.equals(name, item.name) &&
+                Objects.equals(description, item.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description);
     }
 }

@@ -2,9 +2,8 @@ package ru.job4j.trackingsystem;
 
 import org.junit.Test;
 import ru.job4j.trackingsystem.model.Item;
-import ru.job4j.trackingsystem.model.Tracker;
+import ru.job4j.trackingsystem.model.MemTracker;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,14 +15,14 @@ import static org.junit.Assert.assertThat;
  * @version $Id$
  * @since 0.1
  */
-public class TrackerTest {
+public class MemTrackerTest {
 
     /**
      * Проверка метода метод findById.
      */
     @Test
     public void whenCallFindByIdMethodThenTrackerGetItem() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = new Item("1 task", "this is 1 task", 123L);
         Item item2 = new Item("2 task", "this is 2 task", 123L);
         tracker.add(item1);
@@ -36,7 +35,7 @@ public class TrackerTest {
      */
     @Test
     public void whenCallFindByNameMethodThenTrackerHas3EqualNames() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = new Item("12 task", "this is 1 task", 123L);
         Item item2 = new Item("12 task", "this is 2 task", 123L);
         Item item3 = new Item("12 task", "this is 3 task", 123L);
@@ -54,7 +53,7 @@ public class TrackerTest {
      */
     @Test
     public void whenDeleteItemThenTrackerHasNotThisItem() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = new Item("1 task", "this is 1 task", 123L);
         Item item2 = new Item("2 task", "this is 2 task", 123L);
         Item item3 = new Item("3 task", "this is 3 task", 123L);
@@ -71,7 +70,7 @@ public class TrackerTest {
      */
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
         assertThat(tracker.findAll().get(0), is(item));
@@ -82,7 +81,7 @@ public class TrackerTest {
      */
     @Test
     public void whenReplaceNameThenReturnNewName() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item previous = new Item("test1", "testDescription", 123L);
         // Добавляем заявку в трекер. Теперь в объекте проинициализирован id.
         tracker.add(previous);

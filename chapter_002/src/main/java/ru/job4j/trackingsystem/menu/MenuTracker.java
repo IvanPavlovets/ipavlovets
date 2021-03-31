@@ -1,8 +1,9 @@
 package ru.job4j.trackingsystem.menu;
 
 import ru.job4j.trackingsystem.model.Item;
-import ru.job4j.trackingsystem.model.Tracker;
+import ru.job4j.trackingsystem.model.MemTracker;
 import ru.job4j.trackingsystem.io.Input;
+import ru.job4j.trackingsystem.model.Store;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ class EditItem extends BaseAction {
     }
 
     @Override
-    public void execute(Input input, Tracker tracker) {
+    public void execute(Input input, Store tracker) {
         String id = input.ask("Введите id заменяемой заявки");
         if (tracker.findById(id) == null) {
             System.out.println("Нет такой заявки!");
@@ -39,7 +40,7 @@ class FindItemByName extends BaseAction {
     }
 
     @Override
-    public void execute(Input input, Tracker tracker) {
+    public void execute(Input input, Store tracker) {
         String name = input.ask("Введите имя заявки");
         for (Item item : tracker.findByName(name)) {
             System.out.println("Имя: " + item.getName() + " Описание: " + item.getDescription());
@@ -61,7 +62,7 @@ public class MenuTracker {
      * Переменная хранит экземпляр класса хранилища
      * и всех утилитных методов трекинговой системы.
      */
-    private Tracker tracker;
+    private Store tracker;
 
     /**
      * Указатель позиции. Что бы добовлять события в систему.
@@ -82,7 +83,7 @@ public class MenuTracker {
         return ranges;
     }
 
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Store tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -144,7 +145,7 @@ public class MenuTracker {
          * @param tracker - базовый класс всех утилитных методов действий трекинговой системы.
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Store tracker) {
             String name = input.ask("Введите имя новой заявки :");
             String desc = input.ask("Введите описание новой заявки :");
             tracker.add(new Item(name, desc));
@@ -166,7 +167,7 @@ public class MenuTracker {
          * @param tracker - базовый класс всех утилитных методов действий трекинговой системы.
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Store tracker) {
             String id = input.ask("Введите id заявки");
             System.out.println("Заявка с именем: " + tracker.findById(id).getName() + " удалена!");
             tracker.delete(id);
@@ -188,7 +189,7 @@ public class MenuTracker {
          * @param tracker - базовый класс всех утилитных методов действий трекинговой системы.
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Store tracker) {
             for (Item item : tracker.findAll()) {
                 System.out.println(String.format("%s. %s. %s", item.getName(), item.getDescription(), item.getId()));
             }
@@ -210,7 +211,7 @@ public class MenuTracker {
          * @param tracker - базовый класс всех утилитных методов действий трекинговой системы.
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Store tracker) {
             String id = input.ask("Введите id заявки");
             System.out.println("Найденная заявка: " + tracker.findById(id).getName());
         }

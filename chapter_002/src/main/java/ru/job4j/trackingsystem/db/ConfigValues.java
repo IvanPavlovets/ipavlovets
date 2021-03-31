@@ -1,4 +1,4 @@
-package ru.job4j.db;
+package ru.job4j.trackingsystem.db;
 
 import java.io.InputStream;
 import java.util.Properties;

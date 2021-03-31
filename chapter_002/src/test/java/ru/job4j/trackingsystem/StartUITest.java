@@ -5,7 +5,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import ru.job4j.trackingsystem.model.Item;
-import ru.job4j.trackingsystem.model.Tracker;
+import ru.job4j.trackingsystem.model.MemTracker;
+import ru.job4j.trackingsystem.model.Store;
 import ru.job4j.trackingsystem.start.StartUI;
 import ru.job4j.trackingsystem.io.Input;
 import ru.job4j.trackingsystem.io.StubInput;
@@ -62,7 +63,7 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
-        Tracker tracker = new Tracker();
+        Store tracker = new MemTracker();
         Input input = new StubInput(Arrays.asList("0", "test name", "desc", "y"));
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll().get(0).getName(), is("test name"));
@@ -75,7 +76,7 @@ public class StartUITest {
     @Test
     public void whenUserWantSeeAllItemsThenTrackerShowHimAllItems() {
         this.loadOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
         String idItem1 = item1.getId();
@@ -103,7 +104,7 @@ public class StartUITest {
      */
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
-        Tracker tracker = new Tracker();  //Напрямую добавляем заявку
+        MemTracker tracker = new MemTracker();  //Напрямую добавляем заявку
         Item item = tracker.add(new Item());
         Input input = new StubInput(Arrays.asList("2", item.getId(), "test name", "desc", "y"));
         new StartUI(input, tracker).init();
@@ -116,7 +117,7 @@ public class StartUITest {
      */
     @Test
     public void whenUserDeleteItemThenTrackerDoIt() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
         Input input = new StubInput(Arrays.asList("3", item1.getId(), "y"));
@@ -131,7 +132,7 @@ public class StartUITest {
     @Test
     public void whenUserWantFindItemByIdThenTrackerShowHimThisItem() {
         this.loadOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
         String id = item1.getId();
@@ -155,7 +156,7 @@ public class StartUITest {
     @Test
     public void whenUserWantFindItemByNameThenTrackerShowHimThisItem() {
         this.loadOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = tracker.add(new Item("test name1", "desc1"));
         Item item2 = tracker.add(new Item("test name2", "desc2"));
         Input input = new StubInput(Arrays.asList("5", "test name2", "y"));

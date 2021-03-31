@@ -1,10 +1,11 @@
 package ru.job4j.trackingsystem.start;
 
+import ru.job4j.trackingsystem.tracker.SqlTracker;
 import ru.job4j.trackingsystem.io.ConsoleInput;
 import ru.job4j.trackingsystem.io.Input;
 import ru.job4j.trackingsystem.io.ValidateInput;
 import ru.job4j.trackingsystem.menu.MenuTracker;
-import ru.job4j.trackingsystem.model.Tracker;
+import ru.job4j.trackingsystem.model.Store;
 
 /**
  * Класс с системой ввода/вывода для работы с пользовательм.
@@ -18,14 +19,14 @@ public class StartUI {
     /**
      * Хранилище заявок.
      */
-    private final Tracker tracker;
+    private final Store tracker;
 
     /**
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
      * @param tracker хранилище заявок.
      */
-    public StartUI(Input input, Tracker tracker) {
+    public StartUI(Input input, Store tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -53,10 +54,14 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        Input console = new ValidateInput(new ConsoleInput());
-        Tracker tracker = new Tracker();
-        StartUI startUI = new StartUI(console, tracker);
-        startUI.init();
+        Input validate = new ValidateInput(new ConsoleInput());
+        try (Store tracker = new SqlTracker()) {
+            tracker.init();
+            StartUI startUI = new StartUI(validate, tracker);
+            startUI.init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 
