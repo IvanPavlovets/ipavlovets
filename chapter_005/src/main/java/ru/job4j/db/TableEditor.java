@@ -50,6 +50,15 @@ public class TableEditor implements AutoCloseable {
      */
     public void createTable(String tableName) throws SQLException {
         String queryStatement = String.format("create table if not exists %s();", tableName);
+        performStatement(queryStatement);
+    }
+
+    /**
+     * создает и исполняет Statement.
+     * @param queryStatement
+     * @throws SQLException
+     */
+    private void performStatement(String queryStatement) throws SQLException {
         try (Statement st = cn.createStatement()) {
             st.execute(queryStatement);
         }
@@ -61,9 +70,7 @@ public class TableEditor implements AutoCloseable {
      */
     public void dropTable(String tableName) throws SQLException {
         String queryStatement = String.format("drop table if exists %s;", tableName);
-        try (Statement st = cn.createStatement()) {
-            st.execute(queryStatement);
-        }
+        performStatement(queryStatement);
     }
 
     /**
@@ -74,9 +81,7 @@ public class TableEditor implements AutoCloseable {
      */
     public void addColumn(String tableName, String columnName, String type) throws SQLException {
         String queryStatement = String.format("ALTER TABLE %s ADD COLUMN if not exists %s %s;", tableName, columnName, type);
-        try (Statement st = cn.createStatement()) {
-            st.execute(queryStatement);
-        }
+        performStatement(queryStatement);
     }
 
     /**
@@ -87,9 +92,7 @@ public class TableEditor implements AutoCloseable {
      */
     public void dropColumn(String tableName, String columnName) throws SQLException {
         String queryStatement = String.format("ALTER TABLE %s DROP COLUMN if exists %s;", tableName, columnName);
-        try (Statement st = cn.createStatement()) {
-            st.execute(queryStatement);
-        }
+        performStatement(queryStatement);
     }
 
     /**
@@ -101,9 +104,7 @@ public class TableEditor implements AutoCloseable {
      */
     public void renameColumn(String tableName, String columnName, String newColumnName) throws SQLException {
         String queryStatement = String.format("ALTER TABLE %s RENAME COLUMN %s TO %s;", tableName, columnName, newColumnName);
-        try (Statement st = cn.createStatement()) {
-            st.execute(queryStatement);
-        }
+        performStatement(queryStatement);
     }
 
     public String getScheme(String tableName) throws SQLException {
