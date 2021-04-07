@@ -27,10 +27,11 @@ public class ConfigValues {
 
     /**
      * Метод достает искомый парметр из внутреней карты, по ключу.
+     *
      * @param key
      * @return
      */
-    public String get(String key){
+    public String get(String key) {
         return this.prop.getProperty(key);
     }
 }

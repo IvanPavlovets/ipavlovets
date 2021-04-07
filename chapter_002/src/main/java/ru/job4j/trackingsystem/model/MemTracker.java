@@ -9,7 +9,7 @@ import java.util.Random;
  * Класс - являеться хранилищем заявок
  * и осуществляет основные операции взоимодеяствия с заявками Item.
  */
-public class MemTracker implements Store{
+public class MemTracker implements Store {
     /**
      * хранилище заявок.
      */
@@ -45,7 +45,8 @@ public class MemTracker implements Store{
      * Заменяет ячейку в коллекции item
      * найденую по id.
      * Вновь вставленой заявке присваеваеться новый id если еще не создан.
-     *  @param id      - аргумент сравниваеться с id элементов массива items.
+     *
+     * @param id      - аргумент сравниваеться с id элементов массива items.
      * @param newItem - новый обьект массива items который замещает найденый id.
      */
     public boolean replace(String id, Item newItem) {
@@ -63,6 +64,7 @@ public class MemTracker implements Store{
     /**
      * Метод удаления заявки.
      * Удаление происходит по индексу совпавшего элемента по id.
+     *
      * @param id - аргумент сравниваеться с id элементов коллекции items.
      */
     public boolean delete(String id) {

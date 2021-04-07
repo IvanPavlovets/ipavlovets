@@ -12,7 +12,14 @@ public class SqlTracker implements Store {
     /**
      * Хранит соединение с бд, подключение получает по url, username, password.
      */
-    private Connection cn = null;
+    private Connection cn;
+
+    public SqlTracker() {
+    }
+
+    public SqlTracker(Connection cn) {
+        this.cn = cn;
+    }
 
     /**
      * Метод осуществляет регистрацию и установку драйвера JDBC, соединение с БД (url, username, password)
