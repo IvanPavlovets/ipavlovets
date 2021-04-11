@@ -1,11 +1,10 @@
 package ru.job4j.collectionspro.iterator;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.collectionspro.iterator.EvenIterator;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
