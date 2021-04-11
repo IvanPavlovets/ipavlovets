@@ -84,8 +84,8 @@ public class PrepareStatementDemo {
 
     public static void main(String[] args) throws Exception {
         PrepareStatementDemo prepareStatementDemo = new PrepareStatementDemo();
-        prepareStatementDemo.insert(new City( "Krasnoyrsk", 900000));
-        prepareStatementDemo.insert(new City( "Novosibsk", 1200000));
+        prepareStatementDemo.insert(new City("Krasnoyrsk", 900000));
+        prepareStatementDemo.insert(new City("Novosibsk", 1200000));
         prepareStatementDemo.findAll().forEach(System.out::println);
     }
 

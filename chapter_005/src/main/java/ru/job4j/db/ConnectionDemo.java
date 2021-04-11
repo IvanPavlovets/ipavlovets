@@ -1,7 +1,5 @@
 package ru.job4j.db;
 
-import ru.job4j.inputOutput.Config;
-
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;

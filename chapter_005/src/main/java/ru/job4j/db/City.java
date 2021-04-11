@@ -47,11 +47,17 @@ public class City {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         City city = (City) o;
-        return id == city.id &&
-                population == city.population &&
+        return id == city.id
+                &&
+                population == city.population
+                &&
                 Objects.equals(name, city.name);
     }
 
@@ -62,10 +68,12 @@ public class City {
 
     @Override
     public String toString() {
-        return "City{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", population=" + population +
-                '}';
+        return "City{"
+                +
+                "id=" + id
+                +
+                ", name='" + name + '\''
+                +
+                ", population=" + population + '}';
     }
 }
