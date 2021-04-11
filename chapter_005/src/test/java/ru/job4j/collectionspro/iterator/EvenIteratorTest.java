@@ -1,10 +1,10 @@
 package ru.job4j.collectionspro.iterator;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -26,7 +26,7 @@ public class EvenIteratorTest {
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(4));
         assertThat(it.hasNext(), is(true));
-        assertThat(it.next(), is(6));//
+        assertThat(it.next(), is(6));
         assertThat(it.hasNext(), is(false));
         it.next();
     }
