@@ -3,13 +3,32 @@ package ru.job4j.serial;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.*;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.Arrays;
 
+@XmlRootElement(name = "person")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Person {
-    private final boolean sex;
-    private final int age;
-    private final Contact1 contact;
-    private final String[] statuses;
+    @XmlAttribute
+    private boolean sex;
+
+    @XmlAttribute
+    private int age;
+
+    private Contact1 contact;
+
+    @XmlElementWrapper(name = "statuses")
+    @XmlElement(name = "status")
+    private String[] statuses;
+
+    public Person() {
+    }
 
     public Person(boolean sex, int age, Contact1 contact, String... statuses) {
         this.sex = sex;
@@ -31,10 +50,28 @@ public class Person {
                 ", statuses=" + Arrays.toString(statuses) + '}';
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JAXBException {
         final Person person = new Person(false, 30,
                 new Contact1("89233191980"), "Worker", "Married");
         System.out.println(person);
+
+        JAXBContext context = JAXBContext.newInstance(Person.class);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        //сериализацияя/десериализация
+        String xml = "";
+        try (StringWriter writer = new StringWriter()) {
+            marshaller.marshal(person, writer);
+            xml = writer.getBuffer().toString();
+            System.out.println(xml);
+            StringReader reader = new StringReader(xml);
+            Person result = (Person) unmarshaller.unmarshal(reader);
+            System.out.println(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         Car car = new Car(false, 100000L, "toyota",
                 new Engine("1zz-fe", 066),
