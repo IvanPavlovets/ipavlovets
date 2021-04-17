@@ -30,7 +30,8 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
+        return "Car{"
+                +
                 "iSallWheelDrive=" + iSallWheelDrive
                 +
                 ", serialNumb=" + serialNumb
