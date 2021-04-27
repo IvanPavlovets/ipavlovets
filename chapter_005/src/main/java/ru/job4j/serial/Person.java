@@ -53,7 +53,7 @@ public class Person {
     public static void main(String[] args) throws JAXBException {
         final Person person = new Person(false, 30,
                 new Contact1("89233191980"), "Worker", "Married");
-        System.out.println(person);
+        System.out.println("POJO: " + person);
 
         JAXBContext context = JAXBContext.newInstance(Person.class);
         Marshaller marshaller = context.createMarshaller();
@@ -64,24 +64,23 @@ public class Person {
         try (StringWriter writer = new StringWriter()) {
             marshaller.marshal(person, writer);
             xml = writer.getBuffer().toString();
-            System.out.println(xml);
+            System.out.println("xml:\n" + xml);
             StringReader reader = new StringReader(xml);
             Person result = (Person) unmarshaller.unmarshal(reader);
-            System.out.println(result);
+            System.out.println("POJO: " + result);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
         Car car = new Car(false, 100000L, "toyota",
-                new Engine("1zz-fe", 066),
+                new Engine("1zz-fe", 55),
                 new String[]{"white", "metalic"}
         );
-        System.out.println(car);
+        System.out.println("POJO: " + car);
 
         final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(person));
-        System.out.println(gson.toJson(car));
+        System.out.println("JSON: " + gson.toJson(person));
+        System.out.println("JSON: " + gson.toJson(car));
 
         final String personJson =
                 "{"
@@ -95,6 +94,6 @@ public class Person {
                         + "[\"Student\",\"Free\"]"
                         + "}";
         final Person personMod = gson.fromJson(personJson, Person.class);
-        System.out.println(personMod);
+        System.out.println("POJO: " + personMod);
     }
 }

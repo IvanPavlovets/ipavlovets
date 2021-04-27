@@ -28,6 +28,26 @@ public class Car {
         this.colors = colors;
     }
 
+    public boolean isiSallWheelDrive() {
+        return iSallWheelDrive;
+    }
+
+    public long getSerialNumb() {
+        return serialNumb;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public String[] getColors() {
+        return colors;
+    }
+
     @Override
     public String toString() {
         return "Car{"
