@@ -62,7 +62,7 @@ public class Person2 {
         final Person2 pers2 = new Person2(false, 33,
                 new Contact3("89233191980"), "Worker", "Married");
 
-        final CarJson car = new CarJson(true,"toyota",
+        final CarJson car = new CarJson(true, "toyota",
                 new EngineJson("1zz-fe", 88), "black", "white");
 
         JSONObject jsonObj1 = new JSONObject();
