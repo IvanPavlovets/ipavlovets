@@ -44,9 +44,8 @@ select * from person;
 
 --1. В одном запросе получить
 -- имена всех person, которые не состоят в компании с id = 5;
-select * from person where company_id <> 5;
 -- название компании для каждого человека.
-select p.name, c.name from person p left outer join company c on p.company_id = c.id;
+select p.name, c.name from (select * from person where company_id <> 5) p left outer join company c on p.company_id = c.id;
 -- 2. Необходимо выбрать название компании с максимальным количеством человек + количество человек в этой компании.
 select c.name, count(*) as amount
 from company c join
