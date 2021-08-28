@@ -25,7 +25,7 @@ public class GCDemo {
     public static void main(String[] args) {
         info();
         //List<User> users = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10000; i++) {
             new User(i, "N" + i);
         }
         //System.gc(); // вызов сборки мусора

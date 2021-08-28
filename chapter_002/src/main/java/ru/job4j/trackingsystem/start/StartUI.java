@@ -1,5 +1,6 @@
 package ru.job4j.trackingsystem.start;
 
+import ru.job4j.trackingsystem.model.MemTracker;
 import ru.job4j.trackingsystem.tracker.SqlTracker;
 import ru.job4j.trackingsystem.io.ConsoleInput;
 import ru.job4j.trackingsystem.io.Input;
@@ -53,15 +54,21 @@ public class StartUI {
      * Запускт программы.
      * @param args
      */
+//    public static void main(String[] args) {
+//        Input validate = new ValidateInput(new ConsoleInput());
+//        try (Store tracker = new SqlTracker()) {
+//            tracker.init();
+//            StartUI startUI = new StartUI(validate, tracker);
+//            startUI.init();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
     public static void main(String[] args) {
-        Input validate = new ValidateInput(new ConsoleInput());
-        try (Store tracker = new SqlTracker()) {
-            tracker.init();
-            StartUI startUI = new StartUI(validate, tracker);
-            startUI.init();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Input console = new ValidateInput(new ConsoleInput());
+        Store tracker = new MemTracker();
+        StartUI startUI = new StartUI(console, tracker);
+        startUI.init();
     }
 }
 
