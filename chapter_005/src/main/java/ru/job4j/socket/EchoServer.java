@@ -36,7 +36,7 @@ public class EchoServer {
                         server.close();
                     }
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                    out.write(answer.getBytes());
+                    out.write(answer.getBytes()); // отправка сообщений клиенту
                 }
             }
         } catch (Exception e) {
