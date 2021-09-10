@@ -25,13 +25,15 @@ import static org.junit.Assert.assertThat;
  * @since 24.11.2018.
  */
 public class SqlTrackerTest {
+    static Connection connection;
+
     /**
      * Метод создает соединение для нужд тестов.
      *
      * @return Connection
      */
-    public Connection init() {
-        try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
+    public static Connection init() {
+        try (InputStream in = SqlTrackerTest.class.getClassLoader().getResourceAsStream("test.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
