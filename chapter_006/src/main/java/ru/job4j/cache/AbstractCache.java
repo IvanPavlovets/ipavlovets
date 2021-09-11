@@ -28,7 +28,12 @@ public abstract class AbstractCache<K, V> {
      * @return
      */
     public V get(K key) {
-        return cache.get(key).get();
+        V obj;
+        obj = cache.get(key).get();
+        if (obj == null) {
+            obj = load(key);
+        }
+        return obj;
     }
 
     /**
