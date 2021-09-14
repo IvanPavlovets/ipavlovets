@@ -24,14 +24,18 @@ public abstract class AbstractCache<K, V> {
 
     /**
      * получения обьекта из кеша.
+     * если содержимого нет в кеше то загрузить
+     * obj из системы.
      * @param key относительный путь к файлу в директории.
      * @return
      */
     public V get(K key) {
         V obj;
-        obj = cache.get(key).get();
-        if (obj == null) {
+        if (cache.get(key) == null) {
             obj = load(key);
+            this.put(key, obj);
+        } else {
+            obj = cache.get(key).get();
         }
         return obj;
     }

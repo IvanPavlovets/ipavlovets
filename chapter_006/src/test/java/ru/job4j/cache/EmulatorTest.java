@@ -26,6 +26,7 @@ public class EmulatorTest {
         result = null;
         Assert.assertThat(emulator.getFileContent(tempFile1.getFileName().toString()),
                 Is.is("Ivan, Petr, Rail\n"));
-
     }
+
+
 }
