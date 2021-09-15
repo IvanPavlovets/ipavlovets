@@ -31,11 +31,15 @@ public abstract class AbstractCache<K, V> {
      */
     public V get(K key) {
         V obj;
-        if (cache.get(key) == null) {
+        if (cache.get(key) != null) {
+            obj = cache.get(key).get();
+            if (obj == null) {
+                obj = load(key);
+                this.put(key, obj);
+            }
+        } else {
             obj = load(key);
             this.put(key, obj);
-        } else {
-            obj = cache.get(key).get();
         }
         return obj;
     }
