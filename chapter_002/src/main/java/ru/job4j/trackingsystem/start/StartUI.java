@@ -54,21 +54,21 @@ public class StartUI {
      * Запускт программы.
      * @param args
      */
-//    public static void main(String[] args) {
-//        Input validate = new ValidateInput(new ConsoleInput());
-//        try (Store tracker = new SqlTracker()) {
-//            tracker.init();
-//            StartUI startUI = new StartUI(validate, tracker);
-//            startUI.init();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
     public static void main(String[] args) {
-        Input console = new ValidateInput(new ConsoleInput());
-        Store tracker = new MemTracker();
-        StartUI startUI = new StartUI(console, tracker);
-        startUI.init();
+        Input validate = new ValidateInput(new ConsoleInput());
+        try (Store tracker = new SqlTracker()) {
+            tracker.init();
+            StartUI startUI = new StartUI(validate, tracker);
+            startUI.init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+//    public static void main(String[] args) {
+//        Input console = new ValidateInput(new ConsoleInput());
+//        Store tracker = new MemTracker();
+//        StartUI startUI = new StartUI(console, tracker);
+//        startUI.init();
+//    }
 }
 
