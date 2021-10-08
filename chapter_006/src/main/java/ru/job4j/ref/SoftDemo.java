@@ -12,13 +12,14 @@ public class SoftDemo {
 
     /**
      * strong - strong-ссылка;
+     * soft.get()) - вернет strong ссылку
      * soft - soft-ссылка (формально это strong-ссылка на soft-ссылку);
      */
     private static void example1() {
         Object strong = new Object();
         SoftReference<Object> soft = new SoftReference<>(strong);
         strong = null;
-        System.out.println(soft.get()); // вернет strong ссылку
+        System.out.println(soft.get());
         System.out.println(strong);
     }
 
@@ -54,11 +55,11 @@ public class SoftDemo {
     private static void unsafe() {
         List<SoftReference<Object>> someData = new ArrayList<>();
         if (someData.get(0).get() != null) {
-            System.out.println("do something"); // do something
+            System.out.println("do something");
         } else {
-            System.out.println("do something"); // do something
+            System.out.println("do something");
         }
-        System.out.println("do something"); // do something
+        System.out.println("do something");
         someData.get(0).get();
     }
 
@@ -72,10 +73,10 @@ public class SoftDemo {
         List<SoftReference<Object>> someData = new ArrayList<>();
         Object strong = someData.get(0).get();
         if (strong != null) {
-            System.out.println("do something"); // do something
+            System.out.println("do something");
         } else {
-            System.out.println("do something"); // do something
+            System.out.println("do something");
         }
-        System.out.println("do something"); // work with strong
+        System.out.println("do something");
     }
 }

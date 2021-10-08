@@ -100,11 +100,10 @@ public class StartUITest {
      * осуществляющего замену первого элемента хранилища tracker с пустой заявкой new Item()
      * на заявку созданую посредством эмуляции пользовательского ввода в
      * new StubInput(new String[]{"2", item.getId(), "test name", "desc", "6"}).
-     *
      */
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
-        MemTracker tracker = new MemTracker();  //Напрямую добавляем заявку
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item());
         Input input = new StubInput(Arrays.asList("2", item.getId(), "test name", "desc", "y"));
         new StartUI(input, tracker).init();

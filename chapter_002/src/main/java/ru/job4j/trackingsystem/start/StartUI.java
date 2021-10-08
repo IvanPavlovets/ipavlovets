@@ -52,6 +52,13 @@ public class StartUI {
 
     /**
      * Запускт программы.
+     * Вариант запуска с помощью MemeTracker
+     *     public static void main(String[] args) {
+     *         Input console = new ValidateInput(new ConsoleInput());
+     *         Store tracker = new MemTracker();
+     *         StartUI startUI = new StartUI(console, tracker);
+     *         startUI.init();
+     *     }
      * @param args
      */
     public static void main(String[] args) {
@@ -64,11 +71,5 @@ public class StartUI {
             e.printStackTrace();
         }
     }
-//    public static void main(String[] args) {
-//        Input console = new ValidateInput(new ConsoleInput());
-//        Store tracker = new MemTracker();
-//        StartUI startUI = new StartUI(console, tracker);
-//        startUI.init();
-//    }
 }
 

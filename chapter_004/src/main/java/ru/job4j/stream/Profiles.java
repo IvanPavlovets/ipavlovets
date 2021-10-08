@@ -44,7 +44,7 @@ public class Profiles {
         System.out.println("Адресса: " + profiles1.coolect(profiles));
         System.out.println("Адресса1: " + addresses);
 
-        //равенсво
+
         System.out.println(profiles1.coolect(profiles).equals(addresses));
     }
 }

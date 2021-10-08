@@ -17,9 +17,13 @@ import static org.junit.Assert.assertThat;
  * @since 0.1
  */
 public class PaintTest {
-    // поле содержит дефолтный вывод в консоль.
+    /**
+     * поле содержит дефолтный вывод в консоль.
+      */
     private final PrintStream stdout = System.out;
-    // буфер для результата.
+    /**
+     * буфер для результата.
+      */
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
     /**
@@ -44,12 +48,11 @@ public class PaintTest {
     /**
      * Тест проверяет работу класса Paint и его единственного метода draw выводящего информацию в консоль.
      * Для нужд тестирования мы заменяем поток вывода в консоль на вывод в память - ByteArrayOutputStream.
+     * draw(new Square()) - выполняем действия пишушиее в консоль.
      */
     @Test
     public void whenDrawSquare() {
-        // выполняем действия пишушиее в консоль.
         new Paint().draw(new Square());
-        // проверяем результат вычисления
         assertThat(new String(out.toByteArray()), is(new StringBuilder()
                         .append(" +++++\n")
                         .append("+     +\n")
@@ -67,7 +70,6 @@ public class PaintTest {
         pic.add("  ^ ^  ");
         pic.add(" ^   ^ ");
         pic.add("^^^^^^^");
-        // выполняем действия пишушиее в консоль.
         new Paint().draw(new Triangle());
         assertThat(new String(out.toByteArray()), is(pic.toString()));
     }

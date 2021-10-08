@@ -1,5 +1,5 @@
 /**
- * //TODO add comments.
+ * TODO add comments.
  *
  * @author Ivan Pavlovets (ivan150287@gmail.com)
  * @version $Id$

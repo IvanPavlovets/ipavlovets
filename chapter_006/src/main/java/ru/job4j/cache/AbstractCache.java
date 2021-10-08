@@ -15,11 +15,12 @@ public abstract class AbstractCache<K, V> {
 
     /**
      * добавить обьект в кеш.
+     * помещаем в кеш по ключу
      * @param key   относительный путь к файлу в директории.
      * @param value
      */
     public void put(K key, V value) {
-        cache.put(key, new SoftReference<>(value)); // помещаем в кеш по ключу
+        cache.put(key, new SoftReference<>(value));
     }
 
     /**

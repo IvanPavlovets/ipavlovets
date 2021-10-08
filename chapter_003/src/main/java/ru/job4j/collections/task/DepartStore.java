@@ -190,9 +190,6 @@ public class DepartStore {
         List<String> input = Arrays.asList("K1/SK1", "K1/SK2", "K1/SK1/SSK1",
                 "K1/SK1/SSK2", "K2", "K2/SK1/SSK1", "K2/SK1/SSK2");
 
-//        System.out.println("сорт " + departStore.convert(input));
-//        System.out.println("возр " + departStore.sortAsc(departStore.convert(input)));
-//        System.out.println("убыв " + departStore.sortDesc(departStore.convert(input)));
 
         String[] codeDepartArr = new String[]{"K1/SK1", "K1/SK2", "K1/SK1/SSK1",
                 "K1/SK1/SSK2", "K2", "K2/SK1/SSK1", "K2/SK1/SSK2"};

@@ -8,6 +8,11 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 public class CarXML {
+    /**
+     * сериализацияя/десериализация
+     * @param args
+     * @throws JAXBException
+     */
     public static void main(String[] args) throws JAXBException {
         Car car = new Car(false, 100000L, "toyota",
                 new Engine("1zz-fe", 066),
@@ -19,7 +24,6 @@ public class CarXML {
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        //сериализацияя/десериализация
         String xml = "";
         try (StringWriter wr = new StringWriter()) {
             marshaller.marshal(car, wr);

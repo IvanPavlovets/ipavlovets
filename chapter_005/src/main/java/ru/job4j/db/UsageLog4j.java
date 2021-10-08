@@ -26,10 +26,5 @@ public class UsageLog4j {
                 +
                 " byte: {}, short: {}, double: {}, float: {}, long: {}",
                 name, age, sex, b, s, d, f, l);
-//        LOG.trace("trace message");
-//        LOG.debug("debug message");
-//        LOG.info("info message");
-//        LOG.warn("warn message");
-//        LOG.error("error message");
     }
 }

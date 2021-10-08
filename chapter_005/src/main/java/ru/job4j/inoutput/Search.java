@@ -6,10 +6,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * search(start, "java").forEach(System.out::println);
+ */
 public class Search {
     public static void main(String[] args) throws IOException {
         Path start = Paths.get(".");
-    //    search(start, "java").forEach(System.out::println);
     }
 
     public List<Path> search(Path root, String ext) throws IOException {

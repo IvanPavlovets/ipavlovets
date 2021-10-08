@@ -10,19 +10,26 @@ public class TableEditor implements AutoCloseable {
         initConnection();
     }
 
+    /**
+     * editor.dropTable("table1");
+     * editor.dropColumn("table1", "name1");
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         TableEditor editor = new TableEditor();
         editor.createTable("table1");
         editor.addColumn("table1", "name1", "VARCHAR (20)");
-        //editor.dropTable("table1");
-        //editor.dropColumn("table1", "name1");
         editor.renameColumn("table1", "ddd", "fff");
         System.out.println(editor.getScheme("table1"));
 
     }
 
+    /**
+     * ConfigValues - вспомогательный класс для доступа к файлу .properties
+     */
     private void initConnection() {
-        ConfigValues config = new ConfigValues(); // вспомогательный класс для доступа к файлу .properties
+        ConfigValues config = new ConfigValues();
         try {
             Class.forName(config.get("driver-class-name"));
             log("Postgresql JDBC Driver зарегестрирован!");

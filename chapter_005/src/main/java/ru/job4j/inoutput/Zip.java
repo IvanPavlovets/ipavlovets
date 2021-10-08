@@ -25,11 +25,19 @@ public class Zip {
         }
     }
 
+    /**
+     * zip.write(out.readAllBytes()) - записывается содержимое файлов (байты в файл zip)
+     * ZipOutputStream zip - поток записи zip архива
+     * zip.putNextEntry(new ZipEntry(source.getPath())) -
+     * добавление обьекта ZipEntry (оболочка source) в поток записи
+     * @param source
+     * @param target
+     */
     public void packSingleFile(File source, File target) {
-        try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) { // поток записи zip архива
-            zip.putNextEntry(new ZipEntry(source.getPath())); // добавление обьекта ZipEntry (оболочка source) в поток записи
+        try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
+            zip.putNextEntry(new ZipEntry(source.getPath()));
             try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
-                zip.write(out.readAllBytes()); // записывается содержимое файлов (байты в файл zip)
+                zip.write(out.readAllBytes());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,9 +45,9 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
-//        new Zip().packSingleFile(
-//                new File("./chapter_005/pom.xml"),
-//                new File("./chapter_005/pom.zip"));
+        new Zip().packSingleFile(
+                new File("./chapter_005/pom.xml"),
+                new File("./chapter_005/pom.zip"));
 
         ArgZip argZip = new ArgZip(args);
 

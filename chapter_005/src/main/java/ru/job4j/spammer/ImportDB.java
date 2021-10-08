@@ -82,7 +82,7 @@ public class ImportDB {
 
     public static void main(String[] args) throws Exception {
         ImportDB db = new ImportDB("dump.txt");
-        //System.out.println(db.load());
+
         System.out.println(db.save(db.load()));
 
     }

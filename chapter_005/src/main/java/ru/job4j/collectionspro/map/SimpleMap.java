@@ -257,26 +257,32 @@ public class SimpleMap<K, V> implements Iterable<V> {
          * Колизия - ситуация когда hashCode равны и обьекты(поля) разные.
          * Значит не хватило диапозона значений int.
          *
+         * 1) смотрим не одинаковы ли ссылки
+         * 2) проверяем поля не равны ли они по хешкоду
+         * 3) проверяем хешкоды обьектов
          * @param o входящий обьект.
          * @return
          */
         @Override
         public boolean equals(Object o) {
             if (this == o) {
-                return true; // смотрим не одинаковы ли ссылки
+                return true;
             }
             if (o instanceof Node) {
-                Node<K, V> node = (Node) o; // проверяем поля не равны ли они по хешкоду
+                Node<K, V> node = (Node) o;
                 return (Objects.equals(key, node.getKey())
                         &&
                         Objects.equals(value, node.getValue())
                         ||
-                        Objects.equals(hash, node.hashCode())); //проверяем хешкоды обьектов
+                        Objects.equals(hash, node.hashCode()));
             }
             return false;
         }
 
-        // число 31 для лучшего распределения случайных значений хешкодов.
+        /**
+         * число 31 для лучшего распределения случайных значений хешкодов.
+         * @return
+         */
         @Override
         public int hashCode() {
             hash = 31;

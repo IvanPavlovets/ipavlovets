@@ -13,6 +13,10 @@ public class EchoServer {
 
     private static final Logger LOG = LoggerFactory.getLogger(EchoServer.class.getName());
 
+    /**
+     * out.write(answer.getBytes()); - отправка сообщений клиенту
+     * @param args
+     */
     public static void main(String[] args) {
         try (ServerSocket server = new ServerSocket(9000)) {
             boolean isActive = true;
@@ -36,7 +40,7 @@ public class EchoServer {
                         server.close();
                     }
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                    out.write(answer.getBytes()); // отправка сообщений клиенту
+                    out.write(answer.getBytes());
                 }
             }
         } catch (Exception e) {

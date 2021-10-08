@@ -23,6 +23,7 @@ public class SqlTracker implements Store {
 
     /**
      * Метод осуществляет регистрацию и установку драйвера JDBC, соединение с БД (url, username, password)
+     *  ConfigValues - вспомогательный класс для доступа к файлу .properties
      *
      * @throws ClassNotFoundException
      * @throws SQLException
@@ -30,7 +31,7 @@ public class SqlTracker implements Store {
     @Override
     public boolean init() {
         boolean result = false;
-        ConfigValues config = new ConfigValues(); // вспомогательный класс для доступа к файлу .properties
+        ConfigValues config = new ConfigValues();
         try {
             Class.forName(config.get("driver-class-name"));
             log("Postgresql JDBC Driver зарегестрирован!");
@@ -192,7 +193,9 @@ public class SqlTracker implements Store {
         this.cn.close();
     }
 
-    // Simple log utility
+    /**
+     * Simple log utility
+      */
     private static void log(String string) {
         System.out.println(string);
     }

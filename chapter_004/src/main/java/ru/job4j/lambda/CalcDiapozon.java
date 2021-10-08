@@ -19,11 +19,11 @@ public class CalcDiapozon {
         CalcDiapozon calcDiapozon = new CalcDiapozon();
         List<Double> result = calcDiapozon.diaposon(5, 8, x -> 2 * x + 1);
         System.out.println(result);
-        //result.forEach(System.out::println);
+        result.forEach(System.out::println);
 
         List<Double> result1 = calcDiapozon.diaposon(5, 8, x -> Math.pow(x, 2D));
         System.out.println(result1);
-        //result1.forEach(System.out::println);
+        result1.forEach(System.out::println);
 
         List<Double> result2 = calcDiapozon.diaposon(5, 8, x -> Math.log(x));
         System.out.println(result2);

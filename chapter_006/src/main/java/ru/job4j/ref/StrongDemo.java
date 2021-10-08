@@ -6,8 +6,8 @@ import java.util.concurrent.TimeUnit;
 
 public class StrongDemo {
     public static void main(String[] args) throws InterruptedException {
-        //example1();
-        //example2();
+        example1();
+        example2();
         example3();
     }
 
@@ -20,32 +20,32 @@ public class StrongDemo {
                     System.out.println("Object removed!");
                 }
             };
-        } // зануление ссылки
+        }
         for (int i = 0; i < 100; i++) {
             objects[i] = null;
         }
         System.gc(); // очистка
-        TimeUnit.SECONDS.sleep(5); // спать через 5
+        TimeUnit.SECONDS.sleep(5);
     }
 
     private static void example2() throws InterruptedException {
         Object[] objects = new Object[100];
         for (int i = 0; i < 100; i++) {
-            Object object = new Object() { // буферный обьект, с вложеным обьектом
+            Object object = new Object() {
                 Object innerObject = new Object() {
                     @Override
                     protected void finalize() throws Throwable {
-                        System.out.println("Remove inner object!"); // удаляем внешний обьект
+                        System.out.println("Remove inner object!");
                     }
                 };
             };
             objects[i] = object;
-        } // зануление ссылки (удаление, в том числе и внутрених)
+        }
         for (int i = 0; i < 100; i++) {
             objects[i] = null;
         }
         System.gc(); // очистка
-        TimeUnit.SECONDS.sleep(5); // спать через 5
+        TimeUnit.SECONDS.sleep(5);
     }
 
     private static void example3() {

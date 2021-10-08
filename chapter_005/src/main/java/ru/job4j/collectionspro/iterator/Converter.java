@@ -9,7 +9,11 @@ public class Converter {
         return new Iterator<Integer>() {
             Iterator<Integer> iterator = (new ArrayList<Integer>()).iterator();
 
-            @Override // смотрит есть следующий элемнт в структуре данных
+            /**
+             * метод смотрит есть следующий элемнт в структуре данных
+             * @return
+             */
+            @Override
             public boolean hasNext() {
                 while (it.hasNext() && !iterator.hasNext()) {
                     iterator = it.next();
@@ -17,7 +21,11 @@ public class Converter {
                 return iterator.hasNext();
             }
 
-            @Override // должен вернуть элемент и сдвинуть каретку
+            /**
+             * Метод должен вернуть элемент и сдвинуть каретку
+             * @return
+             */
+            @Override
             public Integer next() {
                 if (!this.hasNext()) {
                     throw new NoSuchElementException();

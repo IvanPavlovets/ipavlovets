@@ -15,6 +15,7 @@ public class ConsoleChat {
     /**
      * Класс Scanner принимает поток ввода (System.in) с консоли,
      * с помощью метода получения полной строки nextLine.
+     * out.print(input) - запись в файл
      */
     private Scanner scanner = new Scanner(System.in);
 
@@ -22,28 +23,41 @@ public class ConsoleChat {
         try (BufferedReader in = new BufferedReader(new FileReader("randomphraser.txt"));
              PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream("randomphraser1.txt")))) {
 
-            input = scanner.nextLine(); // чтение с консоли
+            input = scanner.nextLine();
             while (!input.contains("стоп")) {
                 System.out.println(in.readLine());
-                //out.print(input); // запись в файл
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Method generate a letter between a and z
+     * Random - Intialize a Random Number Generator with SysTime as the seed
+     * In the cycle - for each letter in the word
+     * append - Add it to the String
+     * @param wordLength
+     * @return
+     */
     public String generateRandomWord(int wordLength) {
-        Random r = new Random(); // Intialize a Random Number Generator with SysTime as the seed
+        Random r = new Random();
         StringBuilder sb = new StringBuilder(wordLength);
-        for (int i = 0; i < wordLength; i++) { // For each letter in the word
-            char tmp = (char) ('a' + r.nextInt('z' - 'a')); // Generate a letter between a and z
-            sb.append(tmp); // Add it to the String
+        for (int i = 0; i < wordLength; i++) {
+            char tmp = (char) ('a' + r.nextInt('z' - 'a'));
+            sb.append(tmp);
         }
         return sb.toString();
     }
 
+
+    /**
+     *   input = scanner.nextLine(); - чтение с консоли
+     *   System.out.println(new ConsoleChat().generateRandomWord(5));
+     * @param args
+     */
     public static void main(String[] args) {
-//        new ConsoleChat().talk();
+        new ConsoleChat().talk();
 
         try (BufferedReader in = new BufferedReader(new FileReader("randomphraser.txt"));
              PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream("randomphraser1.txt")))) {
@@ -52,14 +66,13 @@ public class ConsoleChat {
             String s;
             Scanner scanner = new Scanner(System.in);
 
-            String input = scanner.nextLine(); // чтение с консоли
+            String input = scanner.nextLine();
             do {
-
                 s = String.valueOf(in.lines().filter(s1 -> Boolean.parseBoolean(s1.indent(r.nextInt()))));
-                System.out.println(s); // читать из файла
-                System.out.println(input); // то что ввел в консоли
-                out.print(input); // запись в файл то что ввел в консоли
-                input = scanner.nextLine(); // чтение с консоли
+                System.out.println(s);
+                System.out.println(input);
+                out.print(input);
+                input = scanner.nextLine();
             } while (!"stop".equals(input));
 
 
@@ -67,7 +80,6 @@ public class ConsoleChat {
             e.printStackTrace();
         }
 
-        //System.out.println(new ConsoleChat().generateRandomWord(5));
 
     }
 }

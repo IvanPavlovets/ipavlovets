@@ -34,9 +34,9 @@ public class School {
         School school = new School();
         System.out.println(school.toMap(students));
 
-//        System.out.println("10A: " + school.collect(students, student -> student.score > 70));
-//        System.out.println("10B: " + school.collect(students, student -> student.score >= 50 && student.score <= 70));
-//        System.out.println("10C: " + school.collect(students, student -> student.score < 50));
+        System.out.println("10A: " + school.collect(students, student -> student.score > 70));
+        System.out.println("10B: " + school.collect(students, student -> student.score >= 50 && student.score <= 70));
+        System.out.println("10C: " + school.collect(students, student -> student.score < 50));
 
     }
 }

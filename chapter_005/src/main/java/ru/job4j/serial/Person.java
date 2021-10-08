@@ -50,6 +50,11 @@ public class Person {
                 ", statuses=" + Arrays.toString(statuses) + '}';
     }
 
+    /**
+     * сериализацияя/десериализация
+     * @param args
+     * @throws JAXBException
+     */
     public static void main(String[] args) throws JAXBException {
         final Person person = new Person(false, 30,
                 new Contact1("89233191980"), "Worker", "Married");
@@ -59,7 +64,6 @@ public class Person {
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        //сериализацияя/десериализация
         String xml = "";
         try (StringWriter writer = new StringWriter()) {
             marshaller.marshal(person, writer);
