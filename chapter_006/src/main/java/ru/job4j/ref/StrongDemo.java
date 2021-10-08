@@ -24,7 +24,7 @@ public class StrongDemo {
         for (int i = 0; i < 100; i++) {
             objects[i] = null;
         }
-        System.gc(); // очистка
+        System.gc();
         TimeUnit.SECONDS.sleep(5);
     }
 
@@ -44,7 +44,7 @@ public class StrongDemo {
         for (int i = 0; i < 100; i++) {
             objects[i] = null;
         }
-        System.gc(); // очистка
+        System.gc();
         TimeUnit.SECONDS.sleep(5);
     }
 

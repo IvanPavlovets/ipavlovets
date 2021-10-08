@@ -19,7 +19,7 @@ public class AbuseTest {
 
     /**
      * out.println("hello foolish dude ") - заполняем файл содержимым
-     * in.lines().forEach(rsl::append) - // записываем файл полученый результат
+     * in.lines().forEach(rsl::append) - записываем файл полученый результат
      *
      * @throws IOException
      */

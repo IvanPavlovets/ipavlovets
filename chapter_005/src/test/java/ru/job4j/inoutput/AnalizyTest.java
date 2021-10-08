@@ -29,11 +29,14 @@ public class AnalizyTest {
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
 
+    /**
+     * out.println("200 10:56:01") - заполняем файл содержимым
+     * @throws IOException
+     */
     @Test
     public void drop() throws IOException {
         File source = folder.newFile("source.txt");
         File target = folder.newFile("target.txt");
-        // заполняем файл содержимым
         try (PrintWriter out = new PrintWriter(source)) {
             out.println("200 10:56:01");
             out.println("500 10:57:01");

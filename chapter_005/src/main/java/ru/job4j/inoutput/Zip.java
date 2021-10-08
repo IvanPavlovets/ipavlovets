@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-//import static Search.search;
-
 public class Zip {
 
     public void packFiles(List<File> sources, File target) {
