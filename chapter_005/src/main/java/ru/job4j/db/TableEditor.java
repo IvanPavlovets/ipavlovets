@@ -13,6 +13,7 @@ public class TableEditor implements AutoCloseable {
     /**
      * editor.dropTable("table1");
      * editor.dropColumn("table1", "name1");
+     * editor.renameColumn("table1", "ddd", "fff");
      * @param args
      * @throws Exception
      */
@@ -20,7 +21,6 @@ public class TableEditor implements AutoCloseable {
         TableEditor editor = new TableEditor();
         editor.createTable("table1");
         editor.addColumn("table1", "name1", "VARCHAR (20)");
-        editor.renameColumn("table1", "ddd", "fff");
         System.out.println(editor.getScheme("table1"));
 
     }
