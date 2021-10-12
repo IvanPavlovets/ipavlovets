@@ -10,35 +10,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImportDB {
-    private Connection cn = null;
+    private static Connection cn;
     private String dump;
 
     public ImportDB(String dump) throws Exception {
         this.dump = dump;
-        initConnection();
+        cn = initConnection();
     }
 
     public ImportDB() {
     }
 
-    public boolean initConnection() throws Exception {
+    public static Connection initConnection() throws Exception {
         boolean result = false;
         ConfigValues config = new ConfigValues();
         String url = config.get("jdbc.url");
         String login = config.get("jdbc.username");
         String password = config.get("jdbc.password");
         Class.forName(config.get("jdbc.driver"));
-        cn = DriverManager.getConnection(url, login, password);
-        if (cn != null) {
-            result = true;
-            System.out.println("Соединение успешно созданно! Можно добавлять данные");
-        }
-        return result;
+        return DriverManager.getConnection(url, login, password);
     }
 
     /**
      * Метод загружает строки из указаного файла и разбивает каждую на лексемы,
      * которые в свою очередь становяться параметрами обьекта User(name, email).
+     *
      * @return - List обьектов - User(name, email)
      * @throws IOException
      */
@@ -58,6 +54,7 @@ public class ImportDB {
 
     /**
      * метод сохраняет загруженый List с обьектами user, в БД
+     *
      * @param users - коллекция обьектов.
      * @return - возврашает модифицированую коллекцию users,
      * каждому обьекту добавляеться парметр id, сгенирированый в БД.

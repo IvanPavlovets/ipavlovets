@@ -6,11 +6,12 @@ import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.sql.Connection;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static ru.job4j.spammer.ImportDB.initConnection;
 
 public class ImportDBTest {
     /**
@@ -18,13 +19,21 @@ public class ImportDBTest {
      */
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
+
+    static Connection cn = null;
     /**
      * Тест проверяет соеденение с БД.
      */
     @Test
     public void checkConnection() throws Exception {
-        ImportDB db = new ImportDB();
-        assertThat(db.initConnection(), is(true));
+        boolean rsl = false;
+        cn = initConnection();
+        if (cn != null) {
+            rsl = true;
+            System.out.println("Соединение успешно созданно! Можно добавлять данные");
+        }
+        assertThat(rsl, is(true));
+        cn.close();
     }
 
     /**
