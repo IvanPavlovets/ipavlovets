@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -27,7 +28,7 @@ public class MemTrackerTest {
         Item item2 = new Item("2 task", "this is 2 task", 123L);
         tracker.add(item1);
         tracker.add(item2);
-        assertThat(tracker.findById(item1.getId()), is(item1));
+        assertEquals(tracker.findById(item1.getId()), item1);
     }
 
     /**
@@ -45,7 +46,7 @@ public class MemTrackerTest {
         tracker.add(item3);
         tracker.add(item4);
         List<Item> itemArr = Arrays.asList(item1, item2, item3);
-        assertThat(tracker.findByName("12 task"), is(itemArr));
+        assertEquals(tracker.findByName("12 task"), itemArr);
     }
 
     /**
@@ -62,7 +63,7 @@ public class MemTrackerTest {
         tracker.add(item3);
         List<Item> itemList = Arrays.asList(item1, item3);
         tracker.delete(item2.getId());
-        assertThat(tracker.findAll(), is(itemList));
+        assertEquals(tracker.findAll(), itemList);
     }
 
     /**
@@ -73,7 +74,7 @@ public class MemTrackerTest {
         MemTracker tracker = new MemTracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
-        assertThat(tracker.findAll().get(0), is(item));
+        assertEquals(tracker.findAll().get(0), item);
     }
 
     /**
@@ -98,6 +99,6 @@ public class MemTrackerTest {
         Item next = new Item("test2", "testDescription2", 1234L);
         next.setId(previous.getId());
         tracker.replace(previous.getId(), next);
-        assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
+        assertEquals(tracker.findById(previous.getId()).getName(), "test2");
     }
 }
