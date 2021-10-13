@@ -1,4 +1,4 @@
-package ru.job4j.trackingsystem;
+package ru.job4j.trackingsystem.tracker;
 
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -6,8 +6,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import ru.job4j.trackingsystem.model.Item;
-import ru.job4j.trackingsystem.tracker.ConnectionRollback;
-import ru.job4j.trackingsystem.tracker.SqlTracker;
 
 import java.io.InputStream;
 import java.sql.Connection;

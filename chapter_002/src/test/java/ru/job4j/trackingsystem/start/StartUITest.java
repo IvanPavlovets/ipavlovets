@@ -1,4 +1,4 @@
-package ru.job4j.trackingsystem;
+package ru.job4j.trackingsystem.start;
 
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
