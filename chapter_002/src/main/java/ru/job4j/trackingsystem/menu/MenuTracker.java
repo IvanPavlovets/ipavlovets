@@ -9,28 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс содержит действие меню - редактировать заявку.
- */
-class EditItem extends BaseAction {
-
-    protected EditItem(int key, String name) {
-        super(key, name);
-    }
-
-    @Override
-    public void execute(Input input, Store tracker) {
-        String id = input.ask("Введите id заменяемой заявки");
-        if (tracker.findById(id) == null) {
-            System.out.println("Нет такой заявки!");
-        }
-        String name = input.ask("Введите имя новой заявки :");
-        String desc = input.ask("Введите описание новой заявки :");
-        Item item = new Item(name, desc);
-        tracker.replace(id, item);
-    }
-}
-
-/**
  * Класс содержит действие меню - найти заявку по имени.
  */
 class FindItemByName extends BaseAction {
@@ -98,7 +76,7 @@ public class MenuTracker {
         this.actions.add(position++, this.new AddItem(0, "Добавить новую заявку."));
         this.actions.add(position++, new ShowItems(1, "Показать все заявки системы."));
         this.actions.add(position++, new EditItem(2, "Редактировать заявку."));
-        this.actions.add(position++, this.new DeleteItem(3, "Удалить заявку."));
+        this.actions.add(position++, new DeleteItem(3, "Удалить заявку."));
         this.actions.add(position++, new FindItemById(4, "Найти заявку по id."));
         this.actions.add(position++, new FindItemByName(5, "Найти заявку по имени."));
     }
@@ -155,7 +133,7 @@ public class MenuTracker {
     /**
      * Внутрений класс содержит внтутренюю логику меню по удалению заявки.
      */
-    private class DeleteItem extends BaseAction {
+    public static class DeleteItem extends BaseAction {
 
         protected DeleteItem(int key, String name) {
             super(key, name);
@@ -199,7 +177,7 @@ public class MenuTracker {
     /**
      * Статический Внутрений класс реализует действия меню по поиску заявки по id.
      */
-    private static class FindItemById extends BaseAction {
+    public static class FindItemById extends BaseAction {
 
         protected FindItemById(int key, String name) {
             super(key, name);

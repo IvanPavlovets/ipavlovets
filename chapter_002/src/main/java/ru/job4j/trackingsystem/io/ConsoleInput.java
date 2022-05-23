@@ -29,7 +29,7 @@ public class ConsoleInput implements Input {
      * этого значения с допустимым диапозоном значений ключа.
      * @param question - вопрос системы ввода/вывода.
      * @param range - диапозон, входит ли значение в данный ключ.
-     * @return
+     * @return int
      */
     @Override
     public int ask(String question, List<Integer> range) {

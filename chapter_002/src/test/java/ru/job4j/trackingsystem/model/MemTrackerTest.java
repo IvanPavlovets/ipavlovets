@@ -1,15 +1,11 @@
 package ru.job4j.trackingsystem.model;
 
 import org.junit.Test;
-import ru.job4j.trackingsystem.model.Item;
-import ru.job4j.trackingsystem.model.MemTracker;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 /**
  * @author Ivan Pavlovets (ivan150287@gmail.com)
